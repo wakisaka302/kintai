@@ -1,6 +1,6 @@
 //testwakisakaaa
 //testwaki01/10/12:38
-
+//test
 
 package kintai;
 
