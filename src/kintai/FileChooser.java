@@ -7,40 +7,14 @@ import java.io.File;
 
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class FileChooser extends JPanel implements ActionListener{
 
 	JLabel label;
-	private String ym;//池邊さんのDB登録クラスに渡す用
+	private String ym;
 	private static String filepath;
-	
-	public String getYm() {
-		return ym;
-	}
-
-	public void setYm(String ym) {
-		this.ym = ym;
-	}
-
-	public static String getFilepath() {
-		return filepath;
-	}
-
-	public void setFilepath(String filepath) {
-		this.filepath = filepath;
-	}
-	
-	public static void main(String[] args){
-		FileChooser frame = new FileChooser();
-
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setBounds(100, 100, 450, 300);
-		frame.setTitle("タイトル");
-		frame.setVisible(true);
-	}
 
 	FileChooser(){
 		JButton button = new JButton("file select");
@@ -76,5 +50,20 @@ public class FileChooser extends JPanel implements ActionListener{
 			filepath = file.toString();
 			//////////////////////////////////////////////////////////////////////////////////////
 		}
+	}
+	public String getYm() {
+		return ym;
+	}
+
+	public void setYm(String ym) {
+		this.ym = ym;
+	}
+
+	public static String getFilepath() {
+		return filepath;
+	}
+
+	public void setFilepath(String filepath) {
+		this.filepath = filepath;
 	}
 }
