@@ -45,7 +45,6 @@ public class frame extends JFrame {
 
 		setContentPane(contentPane);
 		
-		
 		panel = new JPanel();
 		layout = new CardLayout();
 		panel.setLayout(layout);
