@@ -11,8 +11,11 @@ public class loginSuccessImage extends JPanel {
 	 */
 	public loginSuccessImage() {
 		System.out.println(System.getProperty("java.class.path"));
+		
+		
+		String loginSuccessImageLocation = System.getProperty("java.class.path")+"\\image\\IMG_0078.PNG";
 		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\3030743\\Desktop\\kintaiImage\\IMG_0078.PNG"));
+		lblNewLabel.setIcon(new ImageIcon(loginSuccessImageLocation));
 		add(lblNewLabel);
 
 	}
