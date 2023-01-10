@@ -1,3 +1,4 @@
+
 package kintai;
 
 import java.awt.CardLayout;
@@ -53,6 +54,7 @@ public class frame extends JFrame {
 		
 		panel.add(new login());  //CardLayoutにloginを追加
 		panel.add(new personelInfomation());
+		//panel.add( new EmployeeRegistrationPanel(),"EmployeeRegistrationPanel");
 		
 		
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
