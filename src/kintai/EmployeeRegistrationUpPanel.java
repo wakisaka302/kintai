@@ -28,7 +28,7 @@ public class EmployeeRegistrationUpPanel extends JPanel {
 		public EmployeeRegistrationUpPanel() {
 			
 			//データベースから取得したリストを受け取る
-			list =DB. dbGet();
+			list =DB.dbGet();
 			//defulttablemodelにリストを詰める
 			DefaultTableModel tablemodel=new DefaultTableModel(ConyertoObject(),columns);
 			table =new JTable(tablemodel);
