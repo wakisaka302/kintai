@@ -5,7 +5,7 @@ public class EmployeeData {
 	private int kihon;
 	private String seibetu;
 	private String name;
-	String Dammy4;
+	String Dammy5;
 	
 	public EmployeeData(int bangou, int kihon, String seibetu, String name) {
 		super();

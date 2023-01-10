@@ -1,7 +1,3 @@
-//testwakisakaaa
-//testwaki01/10/12:38
-//test
-
 package kintai;
 
 import java.awt.BorderLayout;
@@ -16,13 +12,11 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class FileChooser extends JFrame implements ActionListener{
-
 	JLabel label;
 	static String ym;//池邊さんのDB登録クラスに渡す用
 	private static String filepath;
-	
-	
-	
+	String dammy;
+
 	
 	public String getYm() {
 		return ym;
