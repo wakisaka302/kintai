@@ -55,6 +55,7 @@ public class frame extends JFrame {
 		//panel.add(new backgroundimage(), "backgroundimage");
 		
 		panel.add(new loginSuccessImage(), "loginSuccessImage");
+		panel.add(new loginFailureImage(), "loginFailureImage");
 		
 		panel.add( new EmployeeRegistrationPanel(),"EmployeeRegistrationPanel");
 //		panel.add( new JFileChooserTest1(),"JFileChooserTest1");
