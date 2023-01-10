@@ -20,7 +20,11 @@ public class FileChooser extends JFrame implements ActionListener{
 	JLabel label;
 	static String ym;//池邊さんのDB登録クラスに渡す用
 	private static String filepath;
-
+	
+	String a = "a";
+	
+	
+	
 	public String getYm() {
 		return ym;
 	}
