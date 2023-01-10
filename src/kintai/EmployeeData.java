@@ -13,7 +13,6 @@ public class EmployeeData {
 		this.kihon = kihon;
 		this.seibetu = seibetu;
 		this.name = name;
-		
 	}
 	
 	public  int getBangou() {
