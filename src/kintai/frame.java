@@ -18,6 +18,7 @@ public class frame extends JFrame {
 	private JPanel panel_1;  //ボタン
 	public static CardLayout layout;  //カードレイアウト
 
+	
 	/**
 	 * Launch the application.
 	 */
