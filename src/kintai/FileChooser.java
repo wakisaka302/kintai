@@ -1,4 +1,4 @@
-package kintai;
+package filechooser;
 
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
@@ -11,31 +11,14 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class FileChooser extends JFrame implements ActionListener{
+public class FileChooser extends JPanel implements ActionListener{
+
 	JLabel label;
-	static String ym;//池邊さんのDB登録クラスに渡す用
+	private String ym;//池邊さんのDB登録クラスに渡す用
 	private static String filepath;
-	String dammy;
-
-	
-	public String getYm() {
-		return ym;
-	}
-
-	public void setYm(String ym) {
-		this.ym = ym;
-	}
-
-	public static String getFilepath() {
-		return filepath;
-	}
-
-	public void setFilepath(String filepath) {
-		this.filepath = filepath;
-	}
 	
 	public static void main(String[] args){
-		FileChooser frame = new FileChooser();
+		ileChooser frame = new ileChooser();
 
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setBounds(100, 100, 450, 300);
@@ -55,8 +38,8 @@ public class FileChooser extends JFrame implements ActionListener{
 		JPanel labelPanel = new JPanel();
 		labelPanel.add(label);
 
-		getContentPane().add(labelPanel, BorderLayout.CENTER);
-		getContentPane().add(buttonPanel, BorderLayout.PAGE_END);
+		add(labelPanel, BorderLayout.CENTER);
+		add(buttonPanel, BorderLayout.PAGE_END);
 	}
 
 	public void actionPerformed(ActionEvent e){
@@ -72,7 +55,7 @@ public class FileChooser extends JFrame implements ActionListener{
 			//////////////////////////////////////////////////////////////////////////////////////      
 			String y = file.getName().substring(0,4);
 			String m = file.getName().substring(4,6);
-			String ym = y + "-" + m;
+			String ym = y + "/" + m;
 			
 			filepath = file.toString();
 			//////////////////////////////////////////////////////////////////////////////////////
