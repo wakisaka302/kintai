@@ -1,4 +1,4 @@
-package filechooser;
+package kintai;
 
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
@@ -18,7 +18,7 @@ public class FileChooser extends JPanel implements ActionListener{
 	private static String filepath;
 	
 	public static void main(String[] args){
-		ileChooser frame = new ileChooser();
+		FileChooser frame = new FileChooser();
 
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setBounds(100, 100, 450, 300);
