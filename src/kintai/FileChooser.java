@@ -25,6 +25,7 @@ public class FileChooser extends JFrame implements ActionListener{
 	
 	
 	
+	
 	public String getYm() {
 		return ym;
 	}
