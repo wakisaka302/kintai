@@ -17,6 +17,22 @@ public class FileChooser extends JPanel implements ActionListener{
 	private String ym;//池邊さんのDB登録クラスに渡す用
 	private static String filepath;
 	
+	public String getYm() {
+		return ym;
+	}
+
+	public void setYm(String ym) {
+		this.ym = ym;
+	}
+
+	public static String getFilepath() {
+		return filepath;
+	}
+
+	public void setFilepath(String filepath) {
+		this.filepath = filepath;
+	}
+	
 	public static void main(String[] args){
 		FileChooser frame = new FileChooser();
 
