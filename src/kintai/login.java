@@ -27,6 +27,7 @@ public class login extends JPanel {
 		
 		
 		JButton btnNewButton = new JButton("ログイン");
+		btnNewButton.setActionCommand("loginSuccessImage");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -37,6 +38,10 @@ public class login extends JPanel {
 					buttonPanel.btnNewButton_1.setEnabled(true);
 					buttonPanel.btnNewButton_2.setEnabled(true);
 					buttonPanel.btnNewButton_3.setEnabled(true);
+					
+					//背景画像を変える
+					frame.panel.add(new loginSuccessImage());
+					frame.layout.show(frame.panel, "loginSuccessImage");
 				} 
 				
 				

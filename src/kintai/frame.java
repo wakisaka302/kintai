@@ -54,7 +54,10 @@ public class frame extends JFrame {
 		panel.add(new login());  //CardLayoutにloginを追加
 		//panel.add(new backgroundimage(), "backgroundimage");
 		
+		panel.add(new loginSuccessImage(), "loginSuccessImage");
+		
 		panel.add( new EmployeeRegistrationPanel(),"EmployeeRegistrationPanel");
+//		panel.add( new JFileChooserTest1(),"JFileChooserTest1");
 		
 		panel.add(new personelInfomation());
 		
@@ -62,13 +65,14 @@ public class frame extends JFrame {
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addComponent(panel, GroupLayout.DEFAULT_SIZE, 524, Short.MAX_VALUE)
-				.addComponent(panel_1, GroupLayout.DEFAULT_SIZE, 524, Short.MAX_VALUE)
+				.addComponent(panel_1, GroupLayout.DEFAULT_SIZE, 1010, Short.MAX_VALUE)
+				.addComponent(panel, Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 524, Short.MAX_VALUE)
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addComponent(panel, GroupLayout.DEFAULT_SIZE, 365, Short.MAX_VALUE)
+					.addContainerGap()
+					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 355, Short.MAX_VALUE)
 					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 76, GroupLayout.PREFERRED_SIZE))
 		);

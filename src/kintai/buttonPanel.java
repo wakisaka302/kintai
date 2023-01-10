@@ -47,11 +47,12 @@ public class buttonPanel extends JPanel implements ActionListener{
 		btnNewButton_1.setEnabled(false);
 		add(btnNewButton_1);
 		
+		
+		//CSVファイルチューザー
 		btnNewButton_2 = new JButton("CSV読み取り");
 		btnNewButton_2.setEnabled(false);
-		btnNewButton_2.addActionListener(this);		
-		btnNewButton_2.setActionCommand("");
-		
+//		btnNewButton_2.addActionListener(this);		
+//		btnNewButton_2.setActionCommand("JFileChooserTest1");
 		add(btnNewButton_2);
 
 		btnNewButton_3 = new JButton("明細表示");
@@ -91,7 +92,9 @@ public class buttonPanel extends JPanel implements ActionListener{
 			frame.panel.add(new EmployeeRegistrationPanel(), "EmployeeRegistrationPanel");
 			System.out.println("b");
 			//frame.panel.add(cmd, new EmployeeRegistrationPanel());
-		} 
+		} //  else if(cmd.equals("JFileChooserTest1")) {
+		  //	frame.panel.add(new JFileChooserTest1(), "JFileChooserTest1");
+//		}
 		
 		
 	//	System.out.println("c");
