@@ -71,7 +71,7 @@ public class FileChooser extends JFrame implements ActionListener{
 			//////////////////////////////////////////////////////////////////////////////////////      
 			String y = file.getName().substring(0,4);
 			String m = file.getName().substring(4,6);
-			String ym = y + "/" + m;
+			String ym = y + "-" + m;
 			
 			filepath = file.toString();
 			//////////////////////////////////////////////////////////////////////////////////////

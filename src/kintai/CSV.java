@@ -19,12 +19,15 @@ public class CSV {
 	}
 	
 	
-	public void csvAttendance_dataReader() {
+	public void csvAttendance_dataReader() throws Exception {
 		File file = new File(attendance_filepath);
 		try (BufferedReader br = new BufferedReader(new FileReader(file))){
 		String line;
 		int count = 0;
 		String id="";
+		
+		
+		
 		while ((line = br.readLine()) != null) {
 			String[] s = line.split(",");
 			if(count==0) {//idをとってくる
@@ -32,7 +35,7 @@ public class CSV {
 			} else {//出退勤情報をとってくる(id以外の行をとってくる)
 				//ファイルチューザーからym(年月の値)をとってくる
 				//年、月、日をつなぐときはハイフン「-」で
-				String day = ym+"-"+s[0];
+				String day = FileChooser.ym+"-"+s[0];
 				System.out.println(day);
 				
 				if(s.length>2) {  //出退勤両方記載されている場合
