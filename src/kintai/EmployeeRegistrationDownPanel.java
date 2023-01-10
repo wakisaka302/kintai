@@ -82,7 +82,7 @@ public class EmployeeRegistrationDownPanel extends JPanel {
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String name=textField_3.getText();
-				db DB = new db();
+				DbOperation DB = new DbOperation();
 				DB.dbDelete(name);
 			}
 		});
