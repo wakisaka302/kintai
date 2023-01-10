@@ -14,7 +14,7 @@ import javax.swing.JPanel;
 public class FileChooser extends JFrame implements ActionListener{
 
 	JLabel label;
-	private String ym;//池邊さんのDB登録クラスに渡す用
+	static String ym;//池邊さんのDB登録クラスに渡す用
 	private static String filepath;
 
 	public String getYm() {
