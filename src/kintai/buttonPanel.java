@@ -29,7 +29,10 @@ public class buttonPanel extends JPanel implements ActionListener{
 		btnNewButton = new JButton("社員情報登録");
 		btnNewButton.setEnabled(false);	
 		btnNewButton.addActionListener(this);
+//		btnNewButton.setActionCommand("backgroundimage");
+		
 		btnNewButton.setActionCommand("EmployeeRegistrationPanel");
+		
 		
 //		btnNewButton.addActionListener(new ActionListener() {
 //			public void actionPerformed(ActionEvent e) {
@@ -72,13 +75,25 @@ public class buttonPanel extends JPanel implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String cmd = e.getActionCommand();
-		System.out.println(cmd);
+		
+		
+//		if(cmd.equals("backgroundimage")) {
+//			frame.panel.add(new backgroundimage(), "backgroundimage");
+//			
+//		}
+		
+//		
 		if(cmd.equals("EmployeeRegistrationPanel")) {
+			System.out.println("a");
 			frame.panel.add(new EmployeeRegistrationPanel(), "EmployeeRegistrationPanel");
+			System.out.println("b");
+			frame.panel.add(cmd, new EmployeeRegistrationPanel());
 		} 
 		
-		frame.layout.show(frame.panel, cmd);
 		
+	//	System.out.println("c");
+		frame.layout.show(frame.panel, cmd);
+	//	System.out.println("d");
 		
 	}
 	

@@ -51,10 +51,12 @@ public class frame extends JFrame {
 		panel.setLayout(layout);
 		//↑cardlayout
 		panel_1 = new buttonPanel();  //ボタン
-		
 		panel.add(new login());  //CardLayoutにloginを追加
+		//panel.add(new backgroundimage(), "backgroundimage");
+		
+		panel.add( new EmployeeRegistrationPanel(),"EmployeeRegistrationPanel");
+		
 		panel.add(new personelInfomation());
-		//panel.add( new EmployeeRegistrationPanel(),"EmployeeRegistrationPanel");
 		
 		
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
