@@ -5,13 +5,15 @@ public class EmployeeData {
 	private int kihon;
 	private String seibetu;
 	private String name;
+	String Dammy;
+	
 	public EmployeeData(int bangou, int kihon, String seibetu, String name) {
 		super();
 		this.bangou = bangou;
 		this.kihon = kihon;
 		this.seibetu = seibetu;
 		this.name = name;
-	
+		
 	}
 	
 	public  int getBangou() {
