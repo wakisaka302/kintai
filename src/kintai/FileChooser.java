@@ -1,4 +1,6 @@
 //変更
+//変更②
+
 
 package kintai;
 
