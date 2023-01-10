@@ -64,6 +64,6 @@ public class FileChooser extends JPanel implements ActionListener{
 	}
 
 	public void setFilepath(String filepath) {
-		this.filepath = filepath;
+		FileChooser.filepath = filepath;
 	}
 }
