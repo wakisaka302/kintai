@@ -13,8 +13,6 @@ public class login extends JPanel {
 	private JTextField textField;
 	static boolean a;
 	
-	
-	
 	/**
 	 * Create the panel.
 	 */
