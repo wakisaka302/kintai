@@ -29,7 +29,10 @@ public class buttonPanel extends JPanel implements ActionListener{
 		btnNewButton = new JButton("社員情報登録");
 		btnNewButton.setEnabled(false);	
 		btnNewButton.addActionListener(this);
-		btnNewButton.setActionCommand("backgroundimage");
+//		btnNewButton.setActionCommand("backgroundimage");
+		
+		btnNewButton.setActionCommand("EmployeeRegistrationPanel");
+		
 		
 //		btnNewButton.addActionListener(new ActionListener() {
 //			public void actionPerformed(ActionEvent e) {
@@ -43,7 +46,7 @@ public class buttonPanel extends JPanel implements ActionListener{
 		btnNewButton_1 = new JButton("勤務表");
 		btnNewButton_1.setEnabled(false);
 		add(btnNewButton_1);
-
+		
 		btnNewButton_2 = new JButton("CSV読み取り");
 		btnNewButton_2.setEnabled(false);
 		add(btnNewButton_2);
@@ -72,12 +75,25 @@ public class buttonPanel extends JPanel implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String cmd = e.getActionCommand();
-		if(cmd.equals("backgroundimage")) {
+		
+		
+//		if(cmd.equals("backgroundimage")) {
 //			frame.panel.add(new backgroundimage(), "backgroundimage");
+//			
+//		}
+		
+//		
+		if(cmd.equals("EmployeeRegistrationPanel")) {
+			System.out.println("a");
+			frame.panel.add(new EmployeeRegistrationPanel(), "EmployeeRegistrationPanel");
+			System.out.println("b");
+			frame.panel.add(cmd, new EmployeeRegistrationPanel());
 		} 
 		
-		frame.layout.show(frame.panel, cmd);
 		
+	//	System.out.println("c");
+		frame.layout.show(frame.panel, cmd);
+	//	System.out.println("d");
 		
 	}
 	

@@ -82,8 +82,8 @@ public class EmployeeRegistrationDownPanel extends JPanel {
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String name=textField_3.getText();
-				DbOperation DB = new DbOperation();
-				DB.dbDelete(name);
+//				DbOperation DB = new DbOperation();
+//				DB.dbDelete(name);
 			}
 		});
 

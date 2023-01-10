@@ -3,8 +3,6 @@ package kintai;
 import javax.swing.JPanel;
 
 public class EmployeeRegistrationPanel extends JPanel {
-
-	private JPanel contentPane;
 	
 	
 	
@@ -13,14 +11,12 @@ public class EmployeeRegistrationPanel extends JPanel {
 	 */
 	public EmployeeRegistrationPanel() {
 
-		setBounds(100, 100, 549, 336);
-		contentPane = new JPanel();
 		
 		JPanel downpane = new EmployeeRegistrationDownPanel();
-		contentPane.add(downpane);
+		add(downpane);
 		
 		JPanel uppane = new EmployeeRegistrationUpPanel();
-		contentPane.add(uppane);
+		add(uppane);
 		
 	}
 
