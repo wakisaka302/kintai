@@ -1,3 +1,5 @@
+//変更
+
 package kintai;
 
 import java.awt.BorderLayout;
