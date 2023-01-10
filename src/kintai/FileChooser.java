@@ -1,5 +1,5 @@
 //testwakisakaaa
-//testwaki01/10/12:25
+//testwaki01/10/12:38
 
 
 package kintai;
