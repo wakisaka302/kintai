@@ -38,16 +38,16 @@ public class EmployeeRegistrationUpPanel extends JPanel {
 			TableColumn column =null;
 			for(int i=0;i<columnModel.getColumnCount();i++) {
 				column =columnModel.getColumn(i);
-				column.setPreferredWidth(100);
+				column.setPreferredWidth(50);
 			}
 			//スクロールパネルにテーブルを追加
 			JScrollPane sp=new JScrollPane(table);
-			sp.setPreferredSize(new Dimension(500,100));
+			sp.setPreferredSize(new Dimension(250,100));
 			//upperpanelにスクロールパネルを追加する
 			add(sp);
 		}
 		//ArrayList→Objectに変換する
-			private Object[][]ConyertoObject(){
+			private Object[][] ConyertoObject(){
 		    Object[][] ob =new Object[list.size()][columns.length];
 			
 			//リストでループ処理

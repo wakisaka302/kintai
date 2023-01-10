@@ -49,6 +49,9 @@ public class buttonPanel extends JPanel implements ActionListener{
 		
 		btnNewButton_2 = new JButton("CSV読み取り");
 		btnNewButton_2.setEnabled(false);
+		btnNewButton_2.addActionListener(this);		
+		btnNewButton_2.setActionCommand("");
+		
 		add(btnNewButton_2);
 
 		btnNewButton_3 = new JButton("明細表示");
@@ -87,7 +90,7 @@ public class buttonPanel extends JPanel implements ActionListener{
 			System.out.println("a");
 			frame.panel.add(new EmployeeRegistrationPanel(), "EmployeeRegistrationPanel");
 			System.out.println("b");
-			frame.panel.add(cmd, new EmployeeRegistrationPanel());
+			//frame.panel.add(cmd, new EmployeeRegistrationPanel());
 		} 
 		
 		
