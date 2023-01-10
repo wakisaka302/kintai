@@ -10,7 +10,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
-import create3.backgroundimage;
+//import create3.backgroundimage;
 
 public class buttonPanel extends JPanel implements ActionListener{
 
@@ -73,7 +73,7 @@ public class buttonPanel extends JPanel implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		String cmd = e.getActionCommand();
 		if(cmd.equals("backgroundimage")) {
-			frame.panel.add(new backgroundimage(), "backgroundimage");
+//			frame.panel.add(new backgroundimage(), "backgroundimage");
 		} 
 		
 		frame.layout.show(frame.panel, cmd);
