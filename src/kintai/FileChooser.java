@@ -11,7 +11,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class FileChooser extends JPanel implements ActionListener{
-
 	JLabel label;
 	private String ym;
 	private String filepath;

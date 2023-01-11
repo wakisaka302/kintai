@@ -25,8 +25,6 @@ public class DbOperation {
 		try (Connection con=DriverManager.getConnection(url, user, password ) ;
 				PreparedStatement pstmt = con.prepareStatement(sql); ) {
 
-
-
 			//dayをDate型に変換  startTime,finishTimeをTime型に変換
 
 			Date sqlDate = Date.valueOf(day);
