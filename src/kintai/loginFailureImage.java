@@ -11,9 +11,7 @@ public class loginFailureImage extends JPanel {
 	 */
 	public loginFailureImage() {
 
-		System.out.println(System.getProperty("java.class.path"));
-
-
+		//System.out.println(System.getProperty("java.class.path"));
 		String loginFailureImageLocation = System.getProperty("java.class.path")+"\\image\\IMG_0079.PNG";
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setIcon(new ImageIcon(loginFailureImageLocation));

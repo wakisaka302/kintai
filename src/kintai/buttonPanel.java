@@ -54,7 +54,10 @@ public class buttonPanel extends JPanel implements ActionListener{
 		btnNewButton_2.addActionListener(this);		
 		btnNewButton_2.setActionCommand("FileChooser");
 		add(btnNewButton_2);
-
+		
+		
+		
+		//明細表示
 		btnNewButton_3 = new JButton("明細表示");
 		btnNewButton_3.setEnabled(false);
 		add(btnNewButton_3);

@@ -34,12 +34,12 @@ public class DbOperation {
 			String fft1 = finishTime + ":00";
 			Time sst = Time.valueOf(sst1);
 			Time fft = Time.valueOf(fft1);
-
+			
 			pstmt.setInt(1,Integer.parseInt(id));
 			pstmt.setDate(2, sqlDate);
 			pstmt.setTime(3,sst);
 			pstmt.setTime(4,fft);
-
+			
 
 
 			pstmt.execute();
@@ -65,7 +65,7 @@ public class DbOperation {
 			//			}
 			//			
 			//			pstmt.execute();
-
+			
 		} catch ( SQLException e ) {
 			e.printStackTrace() ;
 		}

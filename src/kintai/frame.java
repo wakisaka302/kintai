@@ -52,7 +52,7 @@ public class frame extends JFrame {
 		//↑cardlayout
 		panel_1 = new buttonPanel();  //ボタン
 		panel.add(new login());  //CardLayoutにloginを追加
-		//panel.add(new backgroundimage(), "backgroundimage");
+		
 		
 		panel.add(new loginSuccessImage(), "loginSuccessImage");
 		panel.add(new loginFailureImage(), "loginFailureImage");

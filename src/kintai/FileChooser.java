@@ -14,7 +14,7 @@ public class FileChooser extends JPanel implements ActionListener{
 
 	JLabel label;
 	private String ym;
-	private static String filepath;
+	private String filepath;
 
 	FileChooser(){
 		JButton button = new JButton("file select");
@@ -37,19 +37,58 @@ public class FileChooser extends JPanel implements ActionListener{
 
 		int selected = filechooser.showOpenDialog(this);
 		if (selected == JFileChooser.APPROVE_OPTION){
+			
 			File file = filechooser.getSelectedFile();
-			label.setText(file.getName());
-			System.out.println(file);
-			System.out.println(file.getName());
+			
+			
+			int fcl = file.getName().length();
+			String extension = file.getName().substring(fcl-3);
+			System.out.println(extension);
+			if(extension.equals("txt") || extension.equals("csv")) {
+				System.out.println("ファイルを読み込みました");
+				label.setText(file.getName());
+				
+				System.out.println(file);
+				System.out.println(file.getName());
+				
+				String y = file.getName().substring(0,4);
+				String m = file.getName().substring(4,6);
+				String ym = y + "-" + m;
+				
+				System.out.println(ym);
+				
+				
+				filepath = file.toString();
+				System.out.println(filepath);
+				
+
+				CSV csv = new CSV(filepath, ym);
+				try {
+					csv.csvAttendance_dataReader();
+				} catch (Exception e1) {
+					// TODO 自動生成された catch ブロック
+					e1.printStackTrace();
+				}
+			
+				
+			} else {
+				System.out.println("読み込めないファイルでした");
+				label.setText("拡張子が「.txt」のファイルを選んでください");
+				
+			}
 
 			//////////////////////////////////////////////////////////////////////////////////////      
-			String y = file.getName().substring(0,4);
-			String m = file.getName().substring(4,6);
-			String ym = y + "/" + m;
 			
-			filepath = file.toString();
+			
+			
 			//////////////////////////////////////////////////////////////////////////////////////
+	
+			
 		}
+		
+		
+		
+		
 	}
 	public String getYm() {
 		return ym;
@@ -59,11 +98,11 @@ public class FileChooser extends JPanel implements ActionListener{
 		this.ym = ym;
 	}
 
-	public static String getFilepath() {
+	public String getFilepath() {
 		return filepath;
 	}
 
 	public void setFilepath(String filepath) {
-		FileChooser.filepath = filepath;
+		this.filepath = filepath;
 	}
 }
