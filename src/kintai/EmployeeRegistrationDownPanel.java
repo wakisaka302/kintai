@@ -16,13 +16,14 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 public class EmployeeRegistrationDownPanel extends JPanel {
 	private JTextField textField_1;
 	private JTextField textField_3;
-
+	
 
 	/**
 	 * Create the panel.
 	 */
 	public EmployeeRegistrationDownPanel() {
 		JRadioButton rdbtnNewRadioButton = new JRadioButton("男");
+		rdbtnNewRadioButton.setSelected(true);
 
 		JRadioButton rdbtnNewRadioButton_1 = new JRadioButton("女");
 		textField_1 = new JTextField();
@@ -35,7 +36,16 @@ public class EmployeeRegistrationDownPanel extends JPanel {
 		JButton btnNewButton = new JButton("登録");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				int kihonkyu=Integer.parseInt(textField_1.getText());
+				int check=0;
+				int kihonkyu=0;
+				try {
+				kihonkyu=Integer.parseInt(textField_1.getText());
+				}catch(IllegalArgumentException a){
+					textField_1.setText("");
+					check=1;
+				}//finally {
+				if(check!=1) {
+					textField_1.setText("");
 				String seibetu="";
 				if(rdbtnNewRadioButton.isSelected()) {
 					seibetu = "男";
@@ -48,10 +58,10 @@ public class EmployeeRegistrationDownPanel extends JPanel {
 				//ArrayList<EmployeeData>list=DB. dbGet();
 				int max=DB.IdMaxGet();
 
-				//				for(int i=0;i<list.size();i++) {
-				//					if(max<list.get(i).getBangou()) {
-				//						max=list.get(i).getBangou();
-				//					}
+//								for(int i=0;i<list.size();i++) {
+//									if(max<list.get(i).getBangou()) {
+//										max=list.get(i).getBangou();
+//									}
 				if(max!=0) {
 					max = max + 1;
 					//DBに接続して社員番号の最大値を取得する
@@ -69,7 +79,9 @@ public class EmployeeRegistrationDownPanel extends JPanel {
 				DB.dbInsert(max, kihonkyu, seibetu, name);
 				EmployeeRegistrationUpPanel.setObjectRowData(max, kihonkyu, seibetu, name);
 			}
-		});
+		}}
+			//}
+	);
 
 		JLabel lblNewLabel_1 = new JLabel("基本給");
 
@@ -86,9 +98,10 @@ public class EmployeeRegistrationDownPanel extends JPanel {
 		JButton btnNewButton_1 = new JButton("削除");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String name=textField_3.getText();
-				//				DbOperation DB = new DbOperation();
-				//				DB.dbDelete(name);
+//				String name=textField_3.getText();
+				//			DbOperation DB = new DbOperation();
+				//DB.dbDelete(name);
+				
 			}
 		});
 
