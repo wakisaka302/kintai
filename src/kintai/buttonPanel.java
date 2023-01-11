@@ -5,9 +5,11 @@ import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.BoxLayout;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.SwingUtilities;
 
 //import create3.backgroundimage;
@@ -23,10 +25,10 @@ public class buttonPanel extends JPanel implements ActionListener{
 	 * Create the panel.
 	 */
 	public buttonPanel() {
-		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 		
 		//社員情報登録
-		btnNewButton = new JButton("社員情報登録");
+		btnNewButton = new JButton("A");
+		btnNewButton.setSize(50, 50);
 		btnNewButton.setEnabled(false);	
 		btnNewButton.addActionListener(this);
 //		btnNewButton.setActionCommand("backgroundimage");
@@ -34,30 +36,24 @@ public class buttonPanel extends JPanel implements ActionListener{
 		btnNewButton.setActionCommand("EmployeeRegistrationPanel");
 		
 		
-//		btnNewButton.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent e) {
-//				
-//			}
-//		});
-		add(btnNewButton);
-		
-		
 		//勤務表
-		btnNewButton_1 = new JButton("勤務表");
+		btnNewButton_1 = new JButton("B");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnNewButton_1.setEnabled(false);
-		add(btnNewButton_1);
 		
 		
 		//CSVファイルチューザー
-		btnNewButton_2 = new JButton("CSV読み取り");
+		btnNewButton_2 = new JButton("C");
+		btnNewButton_2.setSize(50, 50);
 		btnNewButton_2.setEnabled(false);
 		btnNewButton_2.addActionListener(this);		
 		btnNewButton_2.setActionCommand("FileChooser");
-		add(btnNewButton_2);
 
-		btnNewButton_3 = new JButton("明細表示");
+		btnNewButton_3 = new JButton("D");
 		btnNewButton_3.setEnabled(false);
-		add(btnNewButton_3);
 
 		JButton btnNewButton_4 = new JButton("閉じる");
 		btnNewButton_4.addActionListener(new ActionListener() {
@@ -71,8 +67,33 @@ public class buttonPanel extends JPanel implements ActionListener{
 				
 			}
 		});
-		//btnNewButton_4.setEnabled(login.a);
-		add(btnNewButton_4);
+		GroupLayout groupLayout = new GroupLayout(this);
+		groupLayout.setHorizontalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(btnNewButton_1, GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(btnNewButton_2, GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
+					.addGap(6)
+					.addComponent(btnNewButton_3, GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(btnNewButton_4, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE))
+		);
+		groupLayout.setVerticalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addGap(5)
+					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 71, GroupLayout.PREFERRED_SIZE)
+						.addComponent(btnNewButton_1, GroupLayout.DEFAULT_SIZE, 71, Short.MAX_VALUE)
+						.addComponent(btnNewButton_2, GroupLayout.DEFAULT_SIZE, 71, Short.MAX_VALUE)
+						.addComponent(btnNewButton_3, GroupLayout.DEFAULT_SIZE, 71, Short.MAX_VALUE)
+						.addComponent(btnNewButton_4, GroupLayout.PREFERRED_SIZE, 71, GroupLayout.PREFERRED_SIZE))
+					.addGap(232))
+		);
+		setLayout(groupLayout);
 
 	}
 
