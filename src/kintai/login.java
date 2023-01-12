@@ -1,5 +1,6 @@
 package kintai;
 
+import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -8,6 +9,7 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 
 public class login extends JPanel {
 	private JTextField textField;
@@ -17,8 +19,10 @@ public class login extends JPanel {
 	 * Create the panel.
 	 */
 	public login() {
+		setBackground(SystemColor.textHighlight);
 		
 		textField = new JTextField();
+		textField.setHorizontalAlignment(SwingConstants.CENTER);
 		textField.setColumns(4);
 		//textField.getText();
 		
@@ -26,7 +30,7 @@ public class login extends JPanel {
 //		textField.setText(textField.getText());
 		
 		
-		JButton btnNewButton = new JButton("ログイン");
+		JButton btnNewButton = new JButton("LOGIN");
 		btnNewButton.setActionCommand("loginSuccessImage");
 		btnNewButton.setActionCommand("loginFailureImage");
 		btnNewButton.addActionListener(new ActionListener() {
@@ -58,22 +62,22 @@ public class login extends JPanel {
 		);
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(89)
-					.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addGap(60)
-					.addComponent(btnNewButton)
-					.addContainerGap(117, Short.MAX_VALUE))
+			groupLayout.createParallelGroup(Alignment.TRAILING)
+				.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
+					.addGap(72)
+					.addComponent(textField, GroupLayout.PREFERRED_SIZE, 133, GroupLayout.PREFERRED_SIZE)
+					.addGap(18)
+					.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 134, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(95, Short.MAX_VALUE))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(93)
+				.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
+					.addContainerGap(251, Short.MAX_VALUE)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnNewButton))
-					.addContainerGap(116, Short.MAX_VALUE))
+						.addComponent(textField, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)
+						.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE))
+					.addGap(61))
 		);
 		setLayout(groupLayout);
 		
