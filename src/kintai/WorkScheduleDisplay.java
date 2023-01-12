@@ -22,6 +22,7 @@ public class WorkScheduleDisplay extends JPanel {
 	JComboBox<String> comboBox;
 	JComboBox<String> comboBox_1; //テスト用に<String>
 	ArrayList<AData> list;
+	ArrayList<String> ym;
 	ArrayList<AData> display;
 	String[] columns = {"日付","出勤","退勤"};
 	DbOperation db = new DbOperation();
@@ -49,11 +50,12 @@ public class WorkScheduleDisplay extends JPanel {
 		//comboBox_1 = 年月を選択するコンボボックス
 		comboBox_1 = new JComboBox<String>();
 
-		String[] d = {"2022-12","2023-01","2023-02","2023-03"}; 
-		//list = db.dbGetAttendanceData();
+		//String[] d = {"2022-12","2023-01","2023-02","2023-03"}; 
+		ym = db.dbGetYearMonth(list.get(comboBox.getSelectedIndex()).getEmploye_number());
 
-		for(int i = 0; i < d.length; i++) { 
-			comboBox_1.addItem(d[i]);
+		for(int i = 0; i < ym.size(); i++) { 
+			
+			comboBox_1.addItem(ym.get(i));
 		}
 
 

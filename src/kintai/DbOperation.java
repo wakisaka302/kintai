@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Time;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 //import practice_db.InfoData;
@@ -439,9 +440,53 @@ public class DbOperation {
 		return list;
 	}
 
-	//public ArrayList<ADate> dbGetYearMonth() {
+	//年月を取得
+		public ArrayList<String> dbGetYearMonth(int id) {
+			
+			Connection con = null;
+			Statement stmt = null;
+			ResultSet result = null;
 
-	//}
+			ArrayList<String> list = new ArrayList<String>();
+
+
+			String sql = "SELECT DISTINCT date_trunc('month', date) from attendance_data where employee_id = " + id;
+
+			try {
+				/// PostgreSQL に接続
+				con = DriverManager.getConnection ( url, user, password );
+
+				// SQL を実行するためのインスタンスを生成
+				stmt = con.createStatement();
+
+				// SQL の実行結果を格納する
+				result = stmt.executeQuery ( sql );
+
+				//InfoDataのインスタンスを生成し、ArrayListに格納
+				while ( result.next() ) {
+					Date col1 = result.getDate (1) ; 
+					String str = new SimpleDateFormat("yyyy-MM").format(col1);
+
+					list.add(str);
+					//list.add(new InfoData(col1,col2,col3));
+				}
+			} catch ( SQLException e ){
+				e.printStackTrace() ;
+
+			}finally{
+				try {
+					////クローズ処理クローズ処理
+					if(con != null) con.close();
+					if(stmt != null) stmt.close();
+					if(result != null) result.close();
+				}catch(Exception e) {
+					e.printStackTrace();
+
+				}
+			}
+			return list;
+			
+		}
 
 	//選択された社員名・年月より勤務表を表示
 	public ArrayList<AData> dbGetWorkSchedule(int id,Date m) {
