@@ -81,7 +81,7 @@ public class EmployeeRegistrationDownPanel extends JPanel {
 				
 				DB.dbInsert(max, kihonkyu, seibetu, name);
 				EmployeeRegistrationUpPanel.setObjectRowData(max, kihonkyu, seibetu, name);
-				raberu="登録しました";
+				raberu="登録完了しました";
 				lblNewLabel.setText(raberu);
 			}else  {
 				raberu="給料を数値で入力してください";
