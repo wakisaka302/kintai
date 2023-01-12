@@ -35,6 +35,15 @@ public class AData {
 		
 	}
 	
+	//勤務表取得
+	public AData(Date date,Time attendance_at_work,Time leaving_work) {
+		super();
+		this.date = date;
+		this.attendance_at_work = attendance_at_work;
+		this.leaving_work = leaving_work;
+		
+	}
+	
 	
 	//社員テーブル getter setter
 	public int getEmploye_number() {

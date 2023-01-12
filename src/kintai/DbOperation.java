@@ -32,12 +32,12 @@ public class DbOperation {
 			String fft1 = finishTime + ":00";
 			Time sst = Time.valueOf(sst1);
 			Time fft = Time.valueOf(fft1);
-			
+
 			pstmt.setInt(1,Integer.parseInt(id));
 			pstmt.setDate(2, sqlDate);
 			pstmt.setTime(3,sst);
 			pstmt.setTime(4,fft);
-			
+
 
 
 			pstmt.execute();
@@ -63,7 +63,7 @@ public class DbOperation {
 			//			}
 			//			
 			//			pstmt.execute();
-			
+
 		} catch ( SQLException e ) {
 			e.printStackTrace() ;
 		}
@@ -263,36 +263,36 @@ public class DbOperation {
 		}
 		return list;
 	}
-//	public void dbInsert(int kihon,String seibetu ,String name) {
-//		Connection conn = null;
-//		PreparedStatement ps = null;
-//		String sql = "INSERT INTO employee_data(employe_number, basic_salary, sex, name) "
-//				+ "SELECT MAX(employe_number)+1, ?, ?, ? FROM employee_data";
-//		try {
-//			conn = DriverManager.getConnection(url, user, password);
-//			// conn.setAutoCommit(false); 
-//
-//			ps = conn.prepareStatement(sql);
-//			ps.setInt(1, kihon);
-//			ps.setString(2, seibetu);
-//			ps.setString(3, name);
-//			ps.execute();
-//			System.out.println(name+"を追加しました");
-//
-//		} catch (Exception ex) {
-//			//例外発生時の処理
-//			ex.printStackTrace();  //エラー内容をコンソールに出力する
-//
-//		} finally {
-//			try {
-//				if(ps != null) ps.close();
-//
-//				if(conn != null) conn.close();
-//			}catch(Exception e) {
-//				e.printStackTrace();
-//			}
-//		}
-//	}
+	//	public void dbInsert(int kihon,String seibetu ,String name) {
+	//		Connection conn = null;
+	//		PreparedStatement ps = null;
+	//		String sql = "INSERT INTO employee_data(employe_number, basic_salary, sex, name) "
+	//				+ "SELECT MAX(employe_number)+1, ?, ?, ? FROM employee_data";
+	//		try {
+	//			conn = DriverManager.getConnection(url, user, password);
+	//			// conn.setAutoCommit(false); 
+	//
+	//			ps = conn.prepareStatement(sql);
+	//			ps.setInt(1, kihon);
+	//			ps.setString(2, seibetu);
+	//			ps.setString(3, name);
+	//			ps.execute();
+	//			System.out.println(name+"を追加しました");
+	//
+	//		} catch (Exception ex) {
+	//			//例外発生時の処理
+	//			ex.printStackTrace();  //エラー内容をコンソールに出力する
+	//
+	//		} finally {
+	//			try {
+	//				if(ps != null) ps.close();
+	//
+	//				if(conn != null) conn.close();
+	//			}catch(Exception e) {
+	//				e.printStackTrace();
+	//			}
+	//		}
+	//	}
 	public void dbInsert(int bangou,int kihon,String seibetu ,String name) {
 		Connection conn = null;
 		PreparedStatement ps = null;
@@ -389,5 +389,113 @@ public class DbOperation {
 		return maxid;
 	}
 
+	//社員名を取得
+	public ArrayList<AData> dbGetEmployeeData() {
+
+		Connection con = null;
+		Statement stmt = null;
+		ResultSet result = null;
+
+		ArrayList<AData> list = new ArrayList<AData>();
+
+
+		String sql = "SELECT * FROM employee_data";
+
+		try {
+			/// PostgreSQL に接続
+			con = DriverManager.getConnection ( url, user, password );
+
+			// SQL を実行するためのインスタンスを生成
+			stmt = con.createStatement();
+
+			// SQL の実行結果を格納する
+			result = stmt.executeQuery ( sql );
+
+			//InfoDataのインスタンスを生成し、ArrayListに格納
+			while ( result.next() ) {
+				int col1 = result.getInt (1) ; 
+				int col2 = result.getInt (2) ; 
+				String col3 =result.getString (3) ; 
+				String col4 = result.getString (4) ;
+
+				AData d = new AData(col1,col2,col3,col4);
+				list.add(d);
+				//list.add(new InfoData(col1,col2,col3));
+			}
+		} catch ( SQLException e ){
+			e.printStackTrace() ;
+
+		}finally{
+			try {
+				////クローズ処理クローズ処理
+				if(con != null) con.close();
+				if(stmt != null) stmt.close();
+				if(result != null) result.close();
+			}catch(Exception e) {
+				e.printStackTrace();
+
+			}
+		}
+		return list;
+	}
+
+	//public ArrayList<ADate> dbGetYearMonth() {
+
+	//}
+
+	//選択された社員名・年月より勤務表を表示
+	public ArrayList<AData> dbGetWorkSchedule(int id,Date m) {
+
+		Connection con = null;
+		Statement stmt = null;
+		ResultSet result = null;
+
+		ArrayList<AData> display = new ArrayList<AData>();
+
+		//Date sqlDate= Date.valueOf((String) month);
+
+		String sql = "SELECT date,attendance_at_work,leaving_work From attendance_data\n"
+				+ "WHERE date_trunc('month', date) = Date '" + m + "'\n"
+				+ "and employee_id =" + id;
+
+		try {
+			/// PostgreSQL に接続
+			con = DriverManager.getConnection ( url, user, password );
+
+			// SQL を実行するためのインスタンスを生成
+			stmt = con.createStatement();
+
+			// SQL の実行結果を格納する
+			result = stmt.executeQuery ( sql );
+
+			//インスタンスを生成し、ArrayListに格納
+			while ( result.next() ) {
+				Date col1 = result.getDate (1) ; 
+				Time col2 =result.getTime (2) ; 
+				Time col3 = result.getTime (3) ;
+
+				AData d = new AData(col1,col2,col3);
+				display.add(d);
+				//list.add(new InfoData(col1,col2,col3));
+			}
+		} catch ( SQLException e ){
+			e.printStackTrace() ;
+
+		}finally{
+			try {
+				////クローズ処理クローズ処理
+				if(con != null) con.close();
+				if(stmt != null) stmt.close();
+				if(result != null) result.close();
+			}catch(Exception e) {
+				e.printStackTrace();
+
+			}
+		}
+
+		return display;
+	}
+	{
+}
 
 }
