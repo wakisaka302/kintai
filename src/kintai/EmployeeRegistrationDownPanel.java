@@ -1,5 +1,6 @@
 package kintai;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -16,12 +17,15 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 public class EmployeeRegistrationDownPanel extends JPanel {
 	private JTextField textField_1;
 	private JTextField textField_3;
-	
+	String raberu="";
 
 	/**
 	 * Create the panel.
 	 */
 	public EmployeeRegistrationDownPanel() {
+		JLabel lblNewLabel = new JLabel(raberu);
+		lblNewLabel.setForeground(Color.RED);
+		
 		JRadioButton rdbtnNewRadioButton = new JRadioButton("男");
 		rdbtnNewRadioButton.setSelected(true);
 
@@ -41,7 +45,6 @@ public class EmployeeRegistrationDownPanel extends JPanel {
 				try {
 				kihonkyu=Integer.parseInt(textField_1.getText());
 				}catch(IllegalArgumentException a){
-					textField_1.setText("");
 					check=1;
 				}//finally {
 				if(check!=1) {
@@ -78,6 +81,11 @@ public class EmployeeRegistrationDownPanel extends JPanel {
 				
 				DB.dbInsert(max, kihonkyu, seibetu, name);
 				EmployeeRegistrationUpPanel.setObjectRowData(max, kihonkyu, seibetu, name);
+				raberu="登録しました";
+				lblNewLabel.setText(raberu);
+			}else  {
+				raberu="給料を数値で入力してください";
+				lblNewLabel.setText(raberu);
 			}
 		}}
 			//}
@@ -94,62 +102,58 @@ public class EmployeeRegistrationDownPanel extends JPanel {
 		ButtonGroup bgroup = new ButtonGroup();
 		bgroup.add(rdbtnNewRadioButton);
 		bgroup.add(rdbtnNewRadioButton_1);
-
-		JButton btnNewButton_1 = new JButton("削除");
-		btnNewButton_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-//				String name=textField_3.getText();
-				//			DbOperation DB = new DbOperation();
-				//DB.dbDelete(name);
-				
-			}
-		});
+		
+		
 
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
-				groupLayout.createParallelGroup(Alignment.LEADING)
+			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
-						.addGap(21)
-						.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+					.addGap(21)
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addComponent(lblNewLabel, Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 222, GroupLayout.PREFERRED_SIZE)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+								.addComponent(lblNewLabel_3, GroupLayout.PREFERRED_SIZE, 48, GroupLayout.PREFERRED_SIZE)
 								.addGroup(groupLayout.createSequentialGroup()
-										.addComponent(lblNewLabel_1, GroupLayout.PREFERRED_SIZE, 48, GroupLayout.PREFERRED_SIZE)
-										.addPreferredGap(ComponentPlacement.UNRELATED)
-										.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-										.addGap(33)
-										.addComponent(btnNewButton, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-										.addGap(13))
-								.addGroup(groupLayout.createSequentialGroup()
-										.addComponent(lblNewLabel_3, GroupLayout.PREFERRED_SIZE, 48, GroupLayout.PREFERRED_SIZE)
-										.addPreferredGap(ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
-										.addComponent(textField_3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-										.addGap(18)
-										.addComponent(lblNewLabel_2, GroupLayout.PREFERRED_SIZE, 48, GroupLayout.PREFERRED_SIZE)
-										.addPreferredGap(ComponentPlacement.RELATED)
-										.addComponent(rdbtnNewRadioButton)))
-						.addGap(18)
-						.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-								.addComponent(rdbtnNewRadioButton_1, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE)
-								.addComponent(btnNewButton_1, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 73, GroupLayout.PREFERRED_SIZE))
-						.addContainerGap(92, Short.MAX_VALUE))
-				);
+									.addGap(2)
+									.addComponent(lblNewLabel_1, GroupLayout.PREFERRED_SIZE, 48, GroupLayout.PREFERRED_SIZE)))
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING, false)
+								.addComponent(textField_1, Alignment.LEADING)
+								.addComponent(textField_3, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE))))
+					.addGap(18)
+					.addComponent(lblNewLabel_2, GroupLayout.PREFERRED_SIZE, 48, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(rdbtnNewRadioButton)
+					.addGap(18)
+					.addComponent(rdbtnNewRadioButton_1, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap())
+				.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
+					.addGap(301)
+					.addComponent(btnNewButton, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+					.addGap(92))
+		);
 		groupLayout.setVerticalGroup(
-				groupLayout.createParallelGroup(Alignment.LEADING)
+			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
-						.addContainerGap()
-						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-								.addComponent(lblNewLabel_2)
-								.addComponent(lblNewLabel_3)
-								.addComponent(textField_3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-								.addComponent(rdbtnNewRadioButton_1)
-								.addComponent(rdbtnNewRadioButton))
-						.addPreferredGap(ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
-						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-								.addComponent(lblNewLabel_1)
-								.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-								.addComponent(btnNewButton_1)
-								.addComponent(btnNewButton))
-						.addContainerGap(56, Short.MAX_VALUE))
-				);
+					.addContainerGap()
+					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblNewLabel_3)
+						.addComponent(textField_3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(rdbtnNewRadioButton_1)
+						.addComponent(rdbtnNewRadioButton)
+						.addComponent(lblNewLabel_2))
+					.addGap(18)
+					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblNewLabel_1)
+						.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+						.addComponent(btnNewButton)
+						.addComponent(lblNewLabel))
+					.addContainerGap(14, Short.MAX_VALUE))
+		);
 		setLayout(groupLayout);
 
 	}
