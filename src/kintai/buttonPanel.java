@@ -43,6 +43,9 @@ public class buttonPanel extends JPanel implements ActionListener{
 			}
 		});
 		btnNewButton_1.setEnabled(false);
+		btnNewButton_1.addActionListener(this);
+		btnNewButton_1.setActionCommand("workSchedule");
+		
 		
 		
 		//CSVファイルチューザー
@@ -115,7 +118,12 @@ public class buttonPanel extends JPanel implements ActionListener{
 			//frame.panel.add(cmd, new EmployeeRegistrationPanel());
 		}  else if(cmd.equals("FileChooser")) {
 		  	frame.panel.add(new FileChooser(), "FileChooser");
+		}  else if(cmd.equals("workSchedule")) {
+		  	frame.panel.add(new WorkScheduleDisplay(), "workSchedule");
 		}
+		
+		
+		
 		
 		
 	//	System.out.println("c");
