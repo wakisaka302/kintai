@@ -31,11 +31,11 @@ public class EmployeeRegistrationDownPanel extends JPanel {
 
 		JRadioButton rdbtnNewRadioButton_1 = new JRadioButton("女");
 		textField_1 = new JTextField();
-		textField_1.setText("");
+		textField_1.setText(null);
 		textField_1.setColumns(10);
 
 		textField_3 = new JTextField();
-		textField_3.setText("");
+		textField_3.setText(null);
 		textField_3.setColumns(10);
 		JButton btnNewButton = new JButton("登録");
 		btnNewButton.addActionListener(new ActionListener() {
@@ -48,16 +48,15 @@ public class EmployeeRegistrationDownPanel extends JPanel {
 					check=1;
 				}//finally {
 				if(check!=1) {
-					textField_1.setText("");
-					textField_3.setText("");
 				String seibetu="";
 				if(rdbtnNewRadioButton.isSelected()) {
 					seibetu = "男";
 				}else if(rdbtnNewRadioButton_1.isSelected()) {
 					seibetu = "女";
 				}
-
-				String name=textField_3.getText();
+				
+				
+				
 				DbOperation DB = new DbOperation();
 				//ArrayList<EmployeeData>list=DB. dbGet();
 				int max=DB.IdMaxGet();
@@ -80,10 +79,24 @@ public class EmployeeRegistrationDownPanel extends JPanel {
 
 				}
 				
+				String name=textField_3.getText();
+				
+                if(name.length()==0) {
+                	raberu="名前を入力してください";
+    				lblNewLabel.setText(raberu);
+				}else {
+					if(kihonkyu<0) {
+						raberu="基本給が負の整数になっています";
+	    				lblNewLabel.setText(raberu);
+					}else {
 				DB.dbInsert(max, kihonkyu, seibetu, name);
 				EmployeeRegistrationUpPanel.setObjectRowData(max, kihonkyu, seibetu, name);
 				raberu="登録完了しました";
 				lblNewLabel.setText(raberu);
+				textField_1.setText("");
+				textField_3.setText("");
+					}
+				}
 			}else  {
 				raberu="基本給を数値で入力してください";
 				lblNewLabel.setText(raberu);

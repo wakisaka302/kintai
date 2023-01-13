@@ -39,6 +39,7 @@ public class EmployeeRegistrationUpPanel extends JPanel {
 		//defulttablemodelにリストを詰める
 		tablemodel=new DefaultTableModel(ConyertoObject(),columns);
 		table =new JTable(tablemodel);
+		
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		//テーブルの列サイズ設定
 		DefaultTableColumnModel columnModel=(DefaultTableColumnModel)table.getColumnModel();
@@ -47,6 +48,7 @@ public class EmployeeRegistrationUpPanel extends JPanel {
 			column =columnModel.getColumn(i);
 			column.setPreferredWidth(100);
 		}
+		
 		//スクロールパネルにテーブルを追加
 		JScrollPane sp=new JScrollPane(table);
 		sp.setPreferredSize(new Dimension(400,250));
