@@ -15,6 +15,7 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableColumnModel;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumn;
 
 
@@ -51,6 +52,8 @@ public class EmployeeRegistrationUpPanel extends JPanel {
 		}
 		table.setDefaultEditor(Object.class, null);
 		//スクロールパネルにテーブルを追加
+		JTableHeader jheader = table.getTableHeader();
+		jheader.setReorderingAllowed(false);
 		JScrollPane sp=new JScrollPane(table);
 		sp.setPreferredSize(new Dimension(400,250));
 
