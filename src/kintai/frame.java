@@ -63,7 +63,7 @@ public class frame extends JFrame {
 		
 		panel.add( new FileChooser(),"FileChooser");
 		
-		//panel.add( new WorkScheduleDisplay(), "workSchedule");
+		panel.add( new WorkScheduleDisplay(), "workSchedule");
 		
 		
 		
