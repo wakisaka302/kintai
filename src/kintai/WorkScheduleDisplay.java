@@ -155,8 +155,7 @@ public class WorkScheduleDisplay extends JPanel implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO 自動生成されたメソッド・スタブ
-		//System.out.println(comboBox.getSelectedIndex());
+		comboBox_1.removeAllItems();;
 		if(comboBox.getSelectedIndex() >= 0) {
 
 			//int id = db.dbGetEmployeeId((String)comboBox.getSelectedItem());
