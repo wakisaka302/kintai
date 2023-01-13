@@ -67,8 +67,6 @@ public class frame extends JFrame {
 		
 		
 		
-		
-		
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
