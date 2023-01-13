@@ -16,6 +16,7 @@ import javax.swing.JTable;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 
 public class WorkScheduleDisplay extends JPanel implements ActionListener {
 	private JTable table;
@@ -65,6 +66,9 @@ public class WorkScheduleDisplay extends JPanel implements ActionListener {
 		tablemodel = new DefaultTableModel(null,columns);
 		table = new JTable(tablemodel);
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); //複数行選択できないようにする
+		
+		JTableHeader jheader = table.getTableHeader();
+		jheader.setReorderingAllowed(false);
 
 
 		//勤務表表示パネル
@@ -97,14 +101,14 @@ public class WorkScheduleDisplay extends JPanel implements ActionListener {
 				.addGroup(groupLayout.createSequentialGroup()
 					.addGap(34)
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 366, GroupLayout.PREFERRED_SIZE)
+						.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 393, GroupLayout.PREFERRED_SIZE)
 						.addGroup(groupLayout.createSequentialGroup()
 							.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addComponent(comboBox_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addComponent(btnNewButton)))
-					.addContainerGap(50, Short.MAX_VALUE))
+					.addContainerGap(23, Short.MAX_VALUE))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
