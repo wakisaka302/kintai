@@ -78,6 +78,7 @@ public class AData {
 		this.name = name;
 	}
 	
+	
 	//勤怠テーブル getter setter
 	public int getEmployee_id() {
 		return employee_id;

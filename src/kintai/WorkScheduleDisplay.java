@@ -45,18 +45,15 @@ public class WorkScheduleDisplay extends JPanel implements ActionListener {
 			//取得した社員名をコンボボックスへセットする
 			for(int i = 0; i < list.size(); i++) { 
 				comboBox.addItem(list.get(i).getName());
-				//System.out.println(list.get(i).getEmploye_number());
+				
 			}
-
 			comboBox.addActionListener(this);
 
 		}
 
-		//comboBox_1 = 年月を選択するコンボボックス
+		//comboBox_1 = 年月を選択するコンボボックス（comboBoxを選択することで中身が選択できるようになる）
 		comboBox_1 = new JComboBox<String>();
 		
-		
-
 
 		//表示ボタン
 		JButton btnNewButton = new JButton("表示");
@@ -67,6 +64,7 @@ public class WorkScheduleDisplay extends JPanel implements ActionListener {
 		table = new JTable(tablemodel);
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); //複数行選択できないようにする
 		
+		//列が動かないように固定する
 		JTableHeader jheader = table.getTableHeader();
 		jheader.setReorderingAllowed(false);
 
@@ -81,16 +79,10 @@ public class WorkScheduleDisplay extends JPanel implements ActionListener {
 			public void actionPerformed(ActionEvent e) {
 
 				//データベースから取得したリストを受け取る
-
-				
 				Date m= Date.valueOf((String)comboBox_1.getSelectedItem()+"-01");
 				display = db.dbGetWorkSchedule(list.get(comboBox.getSelectedIndex()).getEmploye_number(),m);
 
-				//display = db.dbGetWorkSchedule(list.get(comboBox.getSelectedIndex()).getEmploye_number());
-				//list.get(comboBox_1.getSelectedIndex()).getDate();
 				ConvertToObject(display);
-				//db.dbGetWorkSchedule(comboBox.getSelectedIndex());
-
 
 
 			}
@@ -141,30 +133,18 @@ public class WorkScheduleDisplay extends JPanel implements ActionListener {
 		}
 	}
 
-	
-//	@Override
-//	public void itemStateChanged(ItemEvent e) {
-//System.out.println(comboBox.getSelectedIndex());
-//		if(comboBox.getSelectedIndex() >= 0) {
-//
-//			//int id = db.dbGetEmployeeId((String)comboBox.getSelectedItem());
-//			ym = db.dbGetYearMonth(list.get(comboBox.getSelectedIndex()).getEmployee_id());
-//
-//			for(int i = 0; i < ym.size(); i++) { 
-//				comboBox_1.addItem(ym.get(i));
-//
-//			}
-//		}
-//	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		
+		//年月選択コンボボックスの中身を削除する
 		comboBox_1.removeAllItems();;
+		
+		//年月選択コンボボックスに中身を入れる
 		if(comboBox.getSelectedIndex() >= 0) {
 
-			//int id = db.dbGetEmployeeId((String)comboBox.getSelectedItem());
 			ym = db.dbGetYearMonth(list.get(comboBox.getSelectedIndex()).getEmploye_number());
-//System.out.println(list.get(comboBox.getSelectedIndex()).getEmployee_id());
+
 			for(int i = 0; i < ym.size(); i++) { 
 				comboBox_1.addItem(ym.get(i));
 

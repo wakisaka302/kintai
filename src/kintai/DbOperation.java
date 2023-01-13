@@ -373,7 +373,6 @@ public class DbOperation {
 			while(result.next()) {//実行結果の取得
 				maxid = result.getInt(1);
 
-
 			}
 		} catch ( SQLException e ) {
 			e.printStackTrace() ;
@@ -421,7 +420,7 @@ public class DbOperation {
 
 				AData d = new AData(col1,col2,col3,col4);
 				list.add(d);
-				//list.add(new InfoData(col1,col2,col3));
+				
 			}
 		} catch ( SQLException e ){
 			e.printStackTrace() ;
@@ -440,7 +439,8 @@ public class DbOperation {
 		return list;
 	}
 
-	//年月を取得
+	
+	//年月を取得するメソッド
 		public ArrayList<String> dbGetYearMonth(int id) {
 			
 			Connection con = null;
@@ -468,7 +468,7 @@ public class DbOperation {
 					String str = new SimpleDateFormat("yyyy-MM").format(col1);
 
 					list.add(str);
-					//list.add(new InfoData(col1,col2,col3));
+					
 				}
 			} catch ( SQLException e ){
 				
@@ -498,8 +498,6 @@ public class DbOperation {
 
 		ArrayList<AData> display = new ArrayList<AData>();
 
-		//Date sqlDate= Date.valueOf((String) month);
-
 		String sql = "SELECT date,attendance_at_work,leaving_work From attendance_data\n"
 				+ "WHERE date_trunc('month', date) = Date '" + m + "'\n"
 				+ "and employee_id =" + id;
@@ -522,7 +520,7 @@ public class DbOperation {
 
 				AData d = new AData(col1,col2,col3);
 				display.add(d);
-				//list.add(new InfoData(col1,col2,col3));
+				
 			}
 		} catch ( SQLException e ){
 			e.printStackTrace() ;
