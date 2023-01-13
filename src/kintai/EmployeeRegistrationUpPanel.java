@@ -34,12 +34,13 @@ public class EmployeeRegistrationUpPanel extends JPanel {
 	 */
 	public EmployeeRegistrationUpPanel() {
 
+
 		//データベースから取得したリストを受け取る
 		list =DB.dbGet();
 		//defulttablemodelにリストを詰める
 		tablemodel=new DefaultTableModel(ConyertoObject(),columns);
 		table =new JTable(tablemodel);
-		
+
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		//テーブルの列サイズ設定
 		DefaultTableColumnModel columnModel=(DefaultTableColumnModel)table.getColumnModel();
@@ -48,11 +49,11 @@ public class EmployeeRegistrationUpPanel extends JPanel {
 			column =columnModel.getColumn(i);
 			column.setPreferredWidth(100);
 		}
-		
+		table.setDefaultEditor(Object.class, null);
 		//スクロールパネルにテーブルを追加
 		JScrollPane sp=new JScrollPane(table);
 		sp.setPreferredSize(new Dimension(400,250));
-		
+
 		JButton btnNewButton = new JButton("削除");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -63,23 +64,23 @@ public class EmployeeRegistrationUpPanel extends JPanel {
 		});
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
+				groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addComponent(sp, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 497, Short.MAX_VALUE)
-						.addComponent(btnNewButton, Alignment.TRAILING))
-					.addContainerGap())
-		);
+						.addContainerGap()
+						.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+								.addComponent(sp, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 497, Short.MAX_VALUE)
+								.addComponent(btnNewButton, Alignment.TRAILING))
+						.addContainerGap())
+				);
 		groupLayout.setVerticalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
+				groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(5)
-					.addComponent(sp, GroupLayout.PREFERRED_SIZE, 162, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(btnNewButton)
-					.addContainerGap(52, Short.MAX_VALUE))
-		);
+						.addGap(5)
+						.addComponent(sp, GroupLayout.PREFERRED_SIZE, 162, GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(ComponentPlacement.UNRELATED)
+						.addComponent(btnNewButton)
+						.addContainerGap(52, Short.MAX_VALUE))
+				);
 		setLayout(groupLayout);
 	}
 	//ArrayList→Objectに変換する
@@ -98,14 +99,14 @@ public class EmployeeRegistrationUpPanel extends JPanel {
 		return ob;
 
 	}
-	
+
 	public static void setObjectRowData(int max, int kihonkyu, String seibetu, String name) {
 		//Object[][] ob =new Object[1][4];
 		Object[] obb = new Object[4];
-//		ob[0][0]= max;
-//		ob[0][1]= kihonkyu;
-//		ob[0][2]= seibetu;
-//		ob[0][3]= name;
+		//		ob[0][0]= max;
+		//		ob[0][1]= kihonkyu;
+		//		ob[0][2]= seibetu;
+		//		ob[0][3]= name;
 		obb[0] = max;
 		obb[1] = name;
 		obb[2] = seibetu;
