@@ -49,6 +49,7 @@ public class EmployeeRegistrationDownPanel extends JPanel {
 				}//finally {
 				if(check!=1) {
 					textField_1.setText("");
+					textField_3.setText("");
 				String seibetu="";
 				if(rdbtnNewRadioButton.isSelected()) {
 					seibetu = "男";
@@ -73,7 +74,7 @@ public class EmployeeRegistrationDownPanel extends JPanel {
 //					DB.dbInsert(max, kihonkyu, seibetu, name);
 
 				}else {
-					max = 23013021;
+					max = 20230001;
 					//社員番号が存在しないとき
 //					DB.dbInsert(23013021,kihonkyu, seibetu, name);
 
@@ -84,7 +85,7 @@ public class EmployeeRegistrationDownPanel extends JPanel {
 				raberu="登録完了しました";
 				lblNewLabel.setText(raberu);
 			}else  {
-				raberu="給料を数値で入力してください";
+				raberu="基本給を数値で入力してください";
 				lblNewLabel.setText(raberu);
 			}
 		}}
