@@ -23,7 +23,7 @@ public class login extends JPanel {
 	 * Create the panel.
 	 */
 	public login() {
-		setBackground(new Color(0, 0, 128));
+		setBackground(new Color(0, 64, 128));
 		
 		textField = new JTextField();
 		textField.setHorizontalAlignment(SwingConstants.CENTER);
