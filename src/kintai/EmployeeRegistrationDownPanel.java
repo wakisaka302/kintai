@@ -86,7 +86,7 @@ public class EmployeeRegistrationDownPanel extends JPanel {
     				lblNewLabel.setText(raberu);
 				}else {
 					if(kihonkyu<0) {
-						raberu="基本給が負の整数になっています";
+						raberu="エラー：正しいパスワードを入力してください";
 	    				lblNewLabel.setText(raberu);
 					}else {
 				DB.dbInsert(max, kihonkyu, seibetu, name);
