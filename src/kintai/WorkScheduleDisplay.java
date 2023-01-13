@@ -39,7 +39,6 @@ public class WorkScheduleDisplay extends JPanel implements ActionListener {
 
 		//データベースから取得したリストを受け取る
 		list = db.dbGetEmployeeData();
-<<<<<<< HEAD
 		if(list.size() > 0) {
 
 			//取得した社員名をコンボボックスへセットする
@@ -47,9 +46,6 @@ public class WorkScheduleDisplay extends JPanel implements ActionListener {
 				comboBox.addItem(list.get(i).getName());
 				//System.out.println(list.get(i).getEmploye_number());
 			}
-=======
-		System.out.println(list.size());
->>>>>>> branch 'master' of https://github.com/wakisaka302/kintai
 
 			comboBox.addActionListener(this);
 
@@ -57,20 +53,8 @@ public class WorkScheduleDisplay extends JPanel implements ActionListener {
 
 		//comboBox_1 = 年月を選択するコンボボックス
 		comboBox_1 = new JComboBox<String>();
-<<<<<<< HEAD
 		
 		
-=======
-
-		//String[] d = {"2022-12","2023-01","2023-02","2023-03"}; 
-		ym = db.dbGetYearMonth(list.get(comboBox.getSelectedIndex()).getEmploye_number());
-		
-		for(int i = 0; i < ym.size(); i++) { 
-			
-			comboBox_1.addItem(ym.get(i));
-		}
-
->>>>>>> branch 'master' of https://github.com/wakisaka302/kintai
 
 
 		//表示ボタン
