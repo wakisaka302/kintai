@@ -39,7 +39,7 @@ public class WorkScheduleDisplay extends JPanel {
 		
 		//データベースから取得したリストを受け取る
 		list = db.dbGetEmployeeData();
-
+		System.out.println(list.size());
 
 		//取得した社員名をコンボボックスへセットする
 		for(int i = 0; i < list.size(); i++) { 
@@ -52,7 +52,7 @@ public class WorkScheduleDisplay extends JPanel {
 
 		//String[] d = {"2022-12","2023-01","2023-02","2023-03"}; 
 		ym = db.dbGetYearMonth(list.get(comboBox.getSelectedIndex()).getEmploye_number());
-
+		
 		for(int i = 0; i < ym.size(); i++) { 
 			
 			comboBox_1.addItem(ym.get(i));
