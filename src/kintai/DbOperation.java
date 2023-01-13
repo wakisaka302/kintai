@@ -450,7 +450,7 @@ public class DbOperation {
 			ArrayList<String> list = new ArrayList<String>();
 
 
-			String sql = "SELECT DISTINCT date_trunc('month', date) from attendance_data where employee_id = " + id;
+			String sql = "SELECT DISTINCT date_trunc('month', date) as yearmonth from attendance_data where employee_id = "+ id + "order by yearmonth desc";
 
 			try {
 				/// PostgreSQL に接続
