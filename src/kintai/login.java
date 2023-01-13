@@ -39,7 +39,7 @@ public class login extends JPanel {
 				
 				//ログインでボタンを４つ押せるようにする
 				System.out.println(textField.getText());
-				if(textField.getText().equals("8192")) {
+				if(textField.getText().equals("8192") || textField.getText().equals("８１９２")) {
 					buttonPanel.btnNewButton.setEnabled(true);
 					buttonPanel.btnNewButton_1.setEnabled(true);
 					buttonPanel.btnNewButton_2.setEnabled(true);
@@ -52,6 +52,7 @@ public class login extends JPanel {
 					//背景画像(失敗)を変える
 					frame.panel.add(new loginFailureImage());
 					frame.layout.show(frame.panel, "loginFailureImage");
+					textField.setText("");
 				}
 				
 				
