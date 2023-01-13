@@ -49,6 +49,7 @@ public class EmployeeRegistrationDownPanel extends JPanel {
 				}//finally {
 				if(check!=1) {
 					textField_1.setText("");
+					textField_3.setText("");
 				String seibetu="";
 				if(rdbtnNewRadioButton.isSelected()) {
 					seibetu = "男";
