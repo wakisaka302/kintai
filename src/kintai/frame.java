@@ -39,6 +39,7 @@ public class frame extends JFrame {
 	 * Create the frame.
 	 */
 	public frame() {
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 550, 500);
 		contentPane = new JPanel();
@@ -50,6 +51,7 @@ public class frame extends JFrame {
 		layout = new CardLayout();
 		panel.setLayout(layout);
 		//↑cardlayout
+		
 		panel_1 = new buttonPanel();  //ボタン
 		panel.add(new login());  //CardLayoutにloginを追加
 		
@@ -58,8 +60,10 @@ public class frame extends JFrame {
 		panel.add(new loginFailureImage(), "loginFailureImage");
 		
 		panel.add( new EmployeeRegistrationPanel(),"EmployeeRegistrationPanel");
+		
 		panel.add( new FileChooser(),"FileChooser");
-		panel.add( new WorkScheduleDisplay(), "workSchedule");
+		
+		//panel.add( new WorkScheduleDisplay(), "workSchedule");
 		
 		
 		

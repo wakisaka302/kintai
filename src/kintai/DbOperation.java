@@ -471,6 +471,7 @@ public class DbOperation {
 					//list.add(new InfoData(col1,col2,col3));
 				}
 			} catch ( SQLException e ){
+				
 				e.printStackTrace() ;
 
 			}finally{
