@@ -10,7 +10,7 @@ public class FileChooser1 extends JPanel {
 	public FileChooser1() {
 		
 		JPanel fc = new FileChooser();
-		add(fc);//テスト
+		add(fc);//テストa
 	}
 
 }
