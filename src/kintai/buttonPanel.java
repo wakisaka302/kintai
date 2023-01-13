@@ -3,7 +3,6 @@ package kintai;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
-import java.awt.SystemColor;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -33,7 +32,7 @@ public class buttonPanel extends JPanel implements ActionListener{
 		//社員情報登録
 		btnNewButton = new JButton("社員情報登録");
 		btnNewButton.setFont(new Font("MS UI Gothic", Font.BOLD, 13));
-		btnNewButton.setForeground(SystemColor.window);
+		btnNewButton.setForeground(new Color(255, 255, 255));
 		btnNewButton.setBackground(new Color(0, 51, 102));
 		btnNewButton.setSize(50, 50);
 		btnNewButton.setEnabled(false);	
@@ -45,6 +44,7 @@ public class buttonPanel extends JPanel implements ActionListener{
 		
 		//勤務表
 		btnNewButton_1 = new JButton(" 勤務表表示 ");
+		btnNewButton_1.setForeground(new Color(255, 255, 255));
 		btnNewButton_1.setFont(new Font("MS UI Gothic", Font.BOLD, 14));
 		btnNewButton_1.setBackground(new Color(0, 51, 102));
 		btnNewButton_1.addActionListener(new ActionListener() {
@@ -58,6 +58,7 @@ public class buttonPanel extends JPanel implements ActionListener{
 		
 		//CSVファイルチューザー
 		btnNewButton_2 = new JButton(" CSV登録 ");
+		btnNewButton_2.setForeground(new Color(255, 255, 255));
 		btnNewButton_2.setFont(new Font("MS UI Gothic", Font.BOLD, 14));
 		btnNewButton_2.setBackground(new Color(0, 51, 102));
 		btnNewButton_2.setSize(50, 50);
@@ -66,6 +67,7 @@ public class buttonPanel extends JPanel implements ActionListener{
 		btnNewButton_2.setActionCommand("FileChooser");
 
 		btnNewButton_3 = new JButton("給与明細表示");
+		btnNewButton_3.setForeground(new Color(255, 255, 255));
 		btnNewButton_3.setFont(new Font("MS UI Gothic", Font.BOLD, 14));
 		btnNewButton_3.setBackground(new Color(0, 51, 102));
 		btnNewButton_3.setEnabled(false);
