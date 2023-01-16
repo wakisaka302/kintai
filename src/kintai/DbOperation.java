@@ -64,7 +64,7 @@ public class DbOperation {
 	////CSVを読み込む際、ファイル名を選別するメソッド
 	//ファイル名をDV保存するメソッド
 	public void file_nameInsert(String fileName) throws Exception {
-		String sql = "Insert into file_name values (?,?)" ;
+		String sql = "Insert into file_name values (?)" ;
 		try (Connection con=DriverManager.getConnection(url, user, password ) ;
 				PreparedStatement pstmt = con.prepareStatement(sql); ) {
 			pstmt.setString(1,fileName);
