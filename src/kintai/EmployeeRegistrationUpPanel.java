@@ -41,7 +41,7 @@ public class EmployeeRegistrationUpPanel extends JPanel {
 		//defulttablemodelにリストを詰める
 		tablemodel=new DefaultTableModel(ConyertoObject(),columns);
 		table =new JTable(tablemodel);
-
+		//テーブル内のセルをクリックした時に、デフォルトではクリックされたセルを含む行全体が選択状態になります
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		//テーブルの列サイズ設定
 		DefaultTableColumnModel columnModel=(DefaultTableColumnModel)table.getColumnModel();
@@ -62,8 +62,7 @@ public class EmployeeRegistrationUpPanel extends JPanel {
 		JButton btnNewButton = new JButton("削除");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.out.println(table.getValueAt(table.getSelectedRow(), 0));
-				DB.dbAttendanceDelete(table.getValueAt(table.getSelectedRow(), 0));
+				DB.dbAttendanceDelete(table.getValueAt(table.getSelectedRow(), 0));//IDでAttendance_dataから削除
 				DB.dbDelete(table.getValueAt(table.getSelectedRow(), 0));
 				tablemodel.removeRow(table.getSelectedRow());
 				
@@ -103,18 +102,14 @@ public class EmployeeRegistrationUpPanel extends JPanel {
 			ob[i][3]=list.get(i).getKihon();
 
 		}
-		//System.out.println("a");
+		
 		return ob;
 
 	}
 
 	public static void setObjectRowData(int max, int kihonkyu, String seibetu, String name) {
-		//Object[][] ob =new Object[1][4];
+		
 		Object[] obb = new Object[4];
-		//		ob[0][0]= max;
-		//		ob[0][1]= kihonkyu;
-		//		ob[0][2]= seibetu;
-		//		ob[0][3]= name;
 		obb[0] = max;
 		obb[1] = name;
 		obb[2] = seibetu;

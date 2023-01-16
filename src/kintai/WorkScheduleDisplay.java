@@ -1,5 +1,6 @@
 package kintai;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,6 +11,7 @@ import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -33,6 +35,8 @@ public class WorkScheduleDisplay extends JPanel implements ActionListener {
 	 * Create the panel.
 	 */
 	public WorkScheduleDisplay() {
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setForeground(new Color(255, 0, 0));
 
 		//コンボボックス
 		//comboBox = 社員名を選択するコンボボックス
@@ -82,19 +86,26 @@ public class WorkScheduleDisplay extends JPanel implements ActionListener {
 
 				//データベースから取得したリストを受け取る
 
-				
-				Date m= Date.valueOf((String)comboBox_1.getSelectedItem()+"-01");
+				if(comboBox.getSelectedIndex()!=-1 && comboBox_1.getSelectedIndex()!=-1) {
+				Date m= Date.valueOf((String)comboBox_1.getSelectedItem()+"-01");//mをstring型に変更して年と月しかないので日を付け加えている
 				display = db.dbGetWorkSchedule(list.get(comboBox.getSelectedIndex()).getEmploye_number(),m);
 
 				//display = db.dbGetWorkSchedule(list.get(comboBox.getSelectedIndex()).getEmploye_number());
 				//list.get(comboBox_1.getSelectedIndex()).getDate();
 				ConvertToObject(display);
+				lblNewLabel.setText("表示しました");
 				//db.dbGetWorkSchedule(comboBox.getSelectedIndex());
+				}else {
+					lblNewLabel.setText("選択されてない部分があります");
+				}
+				
 
 
 
 			}
 		});
+		
+		
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
@@ -107,7 +118,9 @@ public class WorkScheduleDisplay extends JPanel implements ActionListener {
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addComponent(comboBox_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(btnNewButton)))
+							.addComponent(btnNewButton)
+							.addGap(34)
+							.addComponent(lblNewLabel)))
 					.addContainerGap(23, Short.MAX_VALUE))
 		);
 		groupLayout.setVerticalGroup(
@@ -117,7 +130,8 @@ public class WorkScheduleDisplay extends JPanel implements ActionListener {
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(comboBox_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnNewButton))
+						.addComponent(btnNewButton)
+						.addComponent(lblNewLabel))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
 					.addContainerGap())
@@ -159,6 +173,7 @@ public class WorkScheduleDisplay extends JPanel implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		
 		comboBox_1.removeAllItems();;
 		if(comboBox.getSelectedIndex() >= 0) {
 
@@ -171,6 +186,5 @@ public class WorkScheduleDisplay extends JPanel implements ActionListener {
 			}
 		}
 	}
-
 }
 

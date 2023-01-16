@@ -43,66 +43,55 @@ public class EmployeeRegistrationDownPanel extends JPanel {
 				int check=0;
 				int kihonkyu=0;
 				try {
-				kihonkyu=Integer.parseInt(textField_1.getText());
+				kihonkyu=Integer.parseInt(textField_1.getText());//textField_1に入力された値を基本給に代入
 				}catch(IllegalArgumentException a){
-					check=1;
-				}//finally {
-				if(check!=1) {
+					check=1;//textField_1に入力された値が数値ではなかった場合checkに１を代入
+				}
+				if(check!=1) {//textField_1に正しい入力がされた場合(check=1でなければ数値が入力されている)
 				String seibetu="";
-				if(rdbtnNewRadioButton.isSelected()) {
+				if(rdbtnNewRadioButton.isSelected()) {//rdbtnNewRadioButtonにチェックが入れば
 					seibetu = "男";
-				}else if(rdbtnNewRadioButton_1.isSelected()) {
+				}else if(rdbtnNewRadioButton_1.isSelected()) {//rdbtnNewRadioButton_1にチェックが入れば
 					seibetu = "女";
 				}
 				
 				
 				
 				DbOperation DB = new DbOperation();
-				//ArrayList<EmployeeData>list=DB. dbGet();
-				int max=DB.IdMaxGet();
-
-//								for(int i=0;i<list.size();i++) {
-//									if(max<list.get(i).getBangou()) {
-//										max=list.get(i).getBangou();
-//									}
+				
+				int max=DB.IdMaxGet();//IdMaxGet()のメソッドを使いIDのmaxの値をを取ってきて１プラスする
 				if(max!=0) {
 					max = max + 1;
-					//DBに接続して社員番号の最大値を取得する
 
-					//社員番号が存在するとき
-//					DB.dbInsert(max, kihonkyu, seibetu, name);
-
-				}else {
+				}else {//IDが取ってこれなければIDを20230001にする
 					max = 20230001;
-					//社員番号が存在しないとき
-//					DB.dbInsert(23013021,kihonkyu, seibetu, name);
 
 				}
 				
-				String name=textField_3.getText();
-				String name2=name.replaceAll("[ 　]", "");
-                if(name2.length()==0) {
+				String name=textField_3.getText();//nameにtextField_3を代入
+				String name2=name.replaceAll("[ 　]", "");//nameの空白を削除
+                if(name2.length()==0) {//nameの文字列が0であればラベルに名前を入力してくださいを表示
                 	raberu="名前を入力してください";
     				lblNewLabel.setText(raberu);
 				}else {
-					if(kihonkyu<0) {
+					if(kihonkyu<0) {//基本給がマイナスなら
 						raberu="エラー：正しいパスワードを入力してください";
 	    				lblNewLabel.setText(raberu);
 					}else {
-				DB.dbInsert(max, kihonkyu, seibetu, name);
+				DB.dbInsert(max, kihonkyu, seibetu, name);//dbInsert()のメソッドを使いデータベースに登録する
 				EmployeeRegistrationUpPanel.setObjectRowData(max, kihonkyu, seibetu, name);
 				raberu="登録完了しました";
 				lblNewLabel.setText(raberu);
-				textField_1.setText("");
-				textField_3.setText("");
+				textField_1.setText("");//入力した値を消す
+				textField_3.setText("");//入力した値を消す
 					}
 				}
-			}else  {
+			}else  {//基本給が数値でなければ
 				raberu="基本給を数値で入力してください";
 				lblNewLabel.setText(raberu);
 			}
 		}}
-			//}
+
 	);
 
 		JLabel lblNewLabel_1 = new JLabel("基本給");
