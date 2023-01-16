@@ -61,7 +61,7 @@ public class FileChooser extends JPanel implements ActionListener{
 		setLayout(groupLayout);
 	}
 
-
+	
 
 	public void actionPerformed(ActionEvent e){
 		JFileChooser filechooser = new JFileChooser();
