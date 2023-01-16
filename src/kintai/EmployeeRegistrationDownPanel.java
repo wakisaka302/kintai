@@ -80,8 +80,8 @@ public class EmployeeRegistrationDownPanel extends JPanel {
 				}
 				
 				String name=textField_3.getText();
-				
-                if(name.length()==0) {
+				String name2=name.replaceAll("[ 　]", "");
+                if(name2.length()==0) {
                 	raberu="名前を入力してください";
     				lblNewLabel.setText(raberu);
 				}else {

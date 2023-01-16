@@ -53,16 +53,21 @@ public class EmployeeRegistrationUpPanel extends JPanel {
 		table.setDefaultEditor(Object.class, null);
 		//スクロールパネルにテーブルを追加
 		JTableHeader jheader = table.getTableHeader();
-		jheader.setReorderingAllowed(false);
+		jheader.setReorderingAllowed(false);//カラムの固定
+		
 		JScrollPane sp=new JScrollPane(table);
+		
 		sp.setPreferredSize(new Dimension(400,250));
 
 		JButton btnNewButton = new JButton("削除");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println(table.getValueAt(table.getSelectedRow(), 0));
+				DB.dbAttendanceDelete(table.getValueAt(table.getSelectedRow(), 0));
 				DB.dbDelete(table.getValueAt(table.getSelectedRow(), 0));
 				tablemodel.removeRow(table.getSelectedRow());
+				
+				
 			}
 		});
 		GroupLayout groupLayout = new GroupLayout(this);
