@@ -1,10 +1,13 @@
 package kintai;
 
-import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
@@ -14,21 +17,45 @@ public class FileChooser extends JPanel implements ActionListener{
 	JLabel label;
 	private String ym;
 	private String filepath;
-
+	private String result = "";
+	
 	FileChooser(){
-		JButton button = new JButton("file select");
-		button.addActionListener(this);
-
-		JPanel buttonPanel = new JPanel();
-		buttonPanel.add(button);
+		setBackground(new Color(0, 64, 128));
 
 		label = new JLabel();
 
 		JPanel labelPanel = new JPanel();
+		labelPanel.setForeground(new Color(255, 255, 255));
+		labelPanel.setBackground(new Color(0, 64, 128));
 		labelPanel.add(label);
-
-		add(labelPanel, BorderLayout.CENTER);
-		add(buttonPanel, BorderLayout.PAGE_END);
+		JButton btnFileSelect = new JButton("file select");
+		btnFileSelect.setForeground(new Color(192, 192, 192));
+		btnFileSelect.setFont(new Font("MS UI Gothic", Font.BOLD, 34));
+		btnFileSelect.setSize(50, 50);
+		btnFileSelect.addActionListener(this);
+		GroupLayout groupLayout = new GroupLayout(this);
+		groupLayout.setHorizontalGroup(
+			groupLayout.createParallelGroup(Alignment.TRAILING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(btnFileSelect, GroupLayout.DEFAULT_SIZE, 426, Short.MAX_VALUE))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(46)
+							.addComponent(labelPanel, GroupLayout.PREFERRED_SIZE, 259, GroupLayout.PREFERRED_SIZE)))
+					.addContainerGap())
+		);
+		groupLayout.setVerticalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addGap(18)
+					.addComponent(labelPanel, GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
+					.addGap(18)
+					.addComponent(btnFileSelect, GroupLayout.PREFERRED_SIZE, 212, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap())
+		);
+		setLayout(groupLayout);
 	}
 
 	public void actionPerformed(ActionEvent e){
@@ -43,7 +70,8 @@ public class FileChooser extends JPanel implements ActionListener{
 			int fcl = file.getName().length();
 			String extension = file.getName().substring(fcl-3);
 			System.out.println(extension);
-			if(extension.equals("txt") || extension.equals("csv")) {
+			if( extension.equals("csv")) {
+				label.setText("ファイルを読み込みました");
 				System.out.println("ファイルを読み込みました");
 				label.setText(file.getName());
 				
@@ -72,7 +100,9 @@ public class FileChooser extends JPanel implements ActionListener{
 				
 			} else {
 				System.out.println("読み込めないファイルでした");
-				label.setText("拡張子が「.txt」のファイルを選んでください");
+				label.setForeground(Color.WHITE);
+				label.setText("拡張子が「.csv」のファイルを選んでください");
+				
 				
 			}
 

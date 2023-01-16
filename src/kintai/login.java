@@ -1,7 +1,7 @@
 package kintai;
 
 import java.awt.Color;
-import java.awt.SystemColor;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -23,7 +23,7 @@ public class login extends JPanel {
 	 * Create the panel.
 	 */
 	public login() {
-		setBackground(SystemColor.textHighlight);
+		setBackground(new Color(0, 64, 128));
 		
 		textField = new JTextField();
 		textField.setHorizontalAlignment(SwingConstants.CENTER);
@@ -71,30 +71,58 @@ public class login extends JPanel {
 				
 			
 		);
+		
+		JLabel lblNewLabel_1 = new JLabel("pass:");
+		lblNewLabel_1.setForeground(new Color(255, 255, 255));
+		lblNewLabel_1.setFont(new Font("MS UI Gothic", Font.BOLD, 26));
+		
+		JLabel lblNewLabel_2 = new JLabel("　　　勤怠管理/給与計算System");
+		lblNewLabel_2.setForeground(new Color(255, 255, 255));
+		lblNewLabel_2.setVerticalAlignment(SwingConstants.BOTTOM);
+		lblNewLabel_2.setFont(new Font("MS UI Gothic", Font.BOLD, 23));
+		
+		JLabel lblNewLabel_2_1 = new JLabel("　　　㈱田島組");
+		lblNewLabel_2_1.setVerticalAlignment(SwingConstants.BOTTOM);
+		lblNewLabel_2_1.setForeground(Color.WHITE);
+		lblNewLabel_2_1.setFont(new Font("MS UI Gothic", Font.BOLD, 23));
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(119)
+							.addGap(64)
+							.addComponent(lblNewLabel_1)
+							.addPreferredGap(ComponentPlacement.RELATED)
 							.addComponent(textField, GroupLayout.PREFERRED_SIZE, 133, GroupLayout.PREFERRED_SIZE)
 							.addGap(7)
 							.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 134, GroupLayout.PREFERRED_SIZE))
 						.addGroup(groupLayout.createSequentialGroup()
 							.addGap(128)
-							.addComponent(lblNewLabel)))
-					.addContainerGap(59, Short.MAX_VALUE))
+							.addComponent(lblNewLabel))
+						.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
+							.addContainerGap(90, Short.MAX_VALUE)
+							.addComponent(lblNewLabel_2_1, GroupLayout.PREFERRED_SIZE, 350, GroupLayout.PREFERRED_SIZE))
+						.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
+							.addGap(90)
+							.addComponent(lblNewLabel_2, GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE)))
+					.addContainerGap())
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(228)
+					.addGap(81)
+					.addComponent(lblNewLabel_2_1, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(lblNewLabel_2)
+					.addGap(108)
 					.addComponent(lblNewLabel)
 					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addComponent(lblNewLabel_1, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE)
 						.addComponent(textField, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)))
+						.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE))
+					.addGap(69))
 		);
 		setLayout(groupLayout);
 		
