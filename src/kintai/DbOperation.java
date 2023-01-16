@@ -245,6 +245,37 @@ public class DbOperation {
 			}
 		}
 	}
+	public void dbAttendanceDelete(Object object) {
+		Connection conn = null;
+		//データベースにアクセスできように接続すること
+		PreparedStatement ps = null;
+		//① SQL文を受け取って解析し、値があればいつでも実行できる状態にします。
+		//　　② SQL文に必要な値をセットします。
+		// 　　③ SQL文を実行します。
+		String sql = "DELETE FROM attendance_data WHERE employee_id = ?";
+		try {
+			conn = DriverManager.getConnection(url, user, password);
+
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, (int) object);
+			int i = ps.executeUpdate();//前処理済みのINSERT文，UPDATE文，およびDELETE文を実行した場合、戻り値で更新行数が返却されます。
+			if(i >=1) {
+				System.out.println(object+"を削除しました");
+			}else {
+				System.out.println("削除する対象が存在しません");
+			}
+		}catch (Exception ex) {
+			ex.printStackTrace(); 
+		}finally {
+			try {
+				if(ps != null) ps.close();
+
+				if(conn != null) conn.close();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
 
 	public  int IdMaxGet() {
 		Connection con=null;
