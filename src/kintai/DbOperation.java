@@ -59,7 +59,57 @@ public class DbOperation {
 	}
 
 
-
+	
+	
+	////CSVを読み込む際、ファイル名を選別するメソッド
+	//ファイル名をDV保存するメソッド
+	public void file_nameInsert(String fileName) throws Exception {
+		String sql = "Insert into file_name values (?,?)" ;
+		try (Connection con=DriverManager.getConnection(url, user, password ) ;
+				PreparedStatement pstmt = con.prepareStatement(sql); ) {
+			pstmt.setString(1,fileName);
+			pstmt.execute();
+		} catch ( SQLException e ) {
+			e.printStackTrace() ;
+		}
+	}
+	
+	//ファイル名を検索するメソッド
+	public ArrayList<String> fileNameGet() {
+		Connection con=null;
+		Statement stmt=null;
+		ResultSet result= null;
+		ArrayList<String> list = new ArrayList<>();
+		String sql = "select * from file_name" ;
+		try {
+			con=DriverManager.getConnection(url, user, password ) ;
+			PreparedStatement pstmt = con.prepareStatement(sql); 
+			result = pstmt.executeQuery();
+			while(result.next()) {
+				String col1=result.getString(1);
+				list.add(col1);
+			}
+		} catch ( SQLException e ) {
+			e.printStackTrace() ;
+		}finally {
+			try {
+				if(result!= null) result.close();
+				if(stmt !=null) stmt.close();
+				if(con != null) con.close();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return list;
+	}
+	
+	
+	
+	////ここまで
+	
+	
+	
+	
 
 
 
