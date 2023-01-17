@@ -129,16 +129,49 @@ public class buttonPanel extends JPanel implements ActionListener{
 			frame.panel.add(new EmployeeRegistrationPanel(), "EmployeeRegistrationPanel");
 			System.out.println("b");
 			//frame.panel.add(cmd, new EmployeeRegistrationPanel());
+			
+			//選択ボタンの色変更
+			btnNewButton.setForeground(Color.CYAN);
+			//選択以外を基準色に戻す
+			btnNewButton_2.setForeground(new Color(255, 255, 255));
+			btnNewButton_1.setForeground(new Color(255, 255, 255));
+			btnNewButton_3.setForeground(new Color(255, 255, 255));
+			
 		}  else if(cmd.equals("FileChooser")) {
 			frame.panel.add(new FileChooser(), "FileChooser");
+			
+			//選択ボタンの色変更
+			btnNewButton_2.setForeground(Color.CYAN);
+			//選択以外を基準色に戻す
+			btnNewButton.setForeground(new Color(255, 255, 255));
+			btnNewButton_1.setForeground(new Color(255, 255, 255));
+			btnNewButton_3.setForeground(new Color(255, 255, 255));
+			
 		}  else if(cmd.equals("workSchedule")) {
 			frame.panel.add(new WorkScheduleDisplay(), "workSchedule");
+			
+			//選択ボタンの色変更
+			btnNewButton_1.setForeground(Color.CYAN);
+			//選択以外を基準色に戻す
+			btnNewButton_2.setForeground(new Color(255, 255, 255));
+			btnNewButton.setForeground(new Color(255, 255, 255));
+			btnNewButton_3.setForeground(new Color(255, 255, 255));
+			
 		} else if(cmd.equals("meisai")) {//追加項目
+
+			
 			try {
 				frame.panel.add(new meisaiPanel(), "meisai");
 			} catch (Exception e1) {
 				e1.printStackTrace();
 			}
+			
+			//選択ボタンの色変更
+			btnNewButton_3.setForeground(Color.CYAN);
+			//選択以外を基準色に戻す
+			btnNewButton_2.setForeground(new Color(255, 255, 255));
+			btnNewButton_1.setForeground(new Color(255, 255, 255));
+			btnNewButton.setForeground(new Color(255, 255, 255));
 		} 
 		frame.layout.show(frame.panel, cmd);
 	}
