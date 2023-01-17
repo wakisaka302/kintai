@@ -38,8 +38,9 @@ public class frame extends JFrame {
 
 	/**
 	 * Create the frame.
+	 * @throws Exception 
 	 */
-	public frame() {
+	public frame() throws Exception {
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 550, 500);
@@ -66,6 +67,9 @@ public class frame extends JFrame {
 		panel.add( new FileChooser(),"FileChooser");
 		
 		panel.add( new WorkScheduleDisplay(), "workSchedule");
+		
+		panel.add( new meisaiPanel(),"meisai");
+		
 		
 		
 		
