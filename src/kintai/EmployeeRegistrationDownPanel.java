@@ -1,6 +1,7 @@
 package kintai;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -23,13 +24,18 @@ public class EmployeeRegistrationDownPanel extends JPanel {
 	 * Create the panel.
 	 */
 	public EmployeeRegistrationDownPanel() {
+		setBackground(new Color(0, 64, 128));
 		JLabel lblNewLabel = new JLabel(raberu);
 		lblNewLabel.setForeground(Color.RED);
 		
 		JRadioButton rdbtnNewRadioButton = new JRadioButton("男");
+		rdbtnNewRadioButton.setForeground(new Color(255, 255, 255));
+		rdbtnNewRadioButton.setBackground(new Color(0, 64, 128));
 		rdbtnNewRadioButton.setSelected(true);
 
 		JRadioButton rdbtnNewRadioButton_1 = new JRadioButton("女");
+		rdbtnNewRadioButton_1.setBackground(new Color(0, 64, 128));
+		rdbtnNewRadioButton_1.setForeground(new Color(255, 255, 255));
 		textField_1 = new JTextField();
 		textField_1.setText(null);
 		textField_1.setColumns(10);
@@ -38,6 +44,7 @@ public class EmployeeRegistrationDownPanel extends JPanel {
 		textField_3.setText(null);
 		textField_3.setColumns(10);
 		JButton btnNewButton = new JButton("登録");
+		btnNewButton.setFont(new Font("MS UI Gothic", Font.BOLD, 12));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int check=0;
@@ -94,11 +101,17 @@ public class EmployeeRegistrationDownPanel extends JPanel {
 
 	);
 
-		JLabel lblNewLabel_1 = new JLabel("基本給");
+		JLabel lblNewLabel_1 = new JLabel("基本給：");
+		lblNewLabel_1.setForeground(new Color(255, 255, 255));
+		lblNewLabel_1.setFont(new Font("MS UI Gothic", Font.BOLD, 12));
 
-		JLabel lblNewLabel_2 = new JLabel("性別");
+		JLabel lblNewLabel_2 = new JLabel("性別：");
+		lblNewLabel_2.setForeground(new Color(255, 255, 255));
+		lblNewLabel_2.setFont(new Font("MS UI Gothic", Font.BOLD, 12));
 
-		JLabel lblNewLabel_3 = new JLabel("名前");
+		JLabel lblNewLabel_3 = new JLabel("社員名：");
+		lblNewLabel_3.setForeground(new Color(255, 255, 255));
+		lblNewLabel_3.setFont(new Font("MS UI Gothic", Font.BOLD, 12));
 
 
 
@@ -115,27 +128,26 @@ public class EmployeeRegistrationDownPanel extends JPanel {
 					.addGap(21)
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addComponent(lblNewLabel, Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 222, GroupLayout.PREFERRED_SIZE)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
+							.addGroup(groupLayout.createSequentialGroup()
+								.addComponent(lblNewLabel_1, GroupLayout.PREFERRED_SIZE, 48, GroupLayout.PREFERRED_SIZE)
+								.addPreferredGap(ComponentPlacement.RELATED)
+								.addComponent(textField_1))
+							.addGroup(groupLayout.createSequentialGroup()
 								.addComponent(lblNewLabel_3, GroupLayout.PREFERRED_SIZE, 48, GroupLayout.PREFERRED_SIZE)
-								.addGroup(groupLayout.createSequentialGroup()
-									.addGap(2)
-									.addComponent(lblNewLabel_1, GroupLayout.PREFERRED_SIZE, 48, GroupLayout.PREFERRED_SIZE)))
+								.addPreferredGap(ComponentPlacement.RELATED)
+								.addComponent(textField_3, GroupLayout.PREFERRED_SIZE, 153, GroupLayout.PREFERRED_SIZE))))
+					.addGap(37)
+					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING, false)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addComponent(lblNewLabel_2, GroupLayout.PREFERRED_SIZE, 48, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.RELATED)
-							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING, false)
-								.addComponent(textField_1, Alignment.LEADING)
-								.addComponent(textField_3, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE))))
-					.addGap(18)
-					.addComponent(lblNewLabel_2, GroupLayout.PREFERRED_SIZE, 48, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(rdbtnNewRadioButton)
-					.addGap(18)
-					.addComponent(rdbtnNewRadioButton_1, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE)
+							.addComponent(rdbtnNewRadioButton)
+							.addGap(18)
+							.addComponent(rdbtnNewRadioButton_1, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE)
+							.addGap(17))
+						.addComponent(btnNewButton, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 					.addContainerGap())
-				.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
-					.addGap(301)
-					.addComponent(btnNewButton, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-					.addGap(92))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
@@ -144,18 +156,17 @@ public class EmployeeRegistrationDownPanel extends JPanel {
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblNewLabel_3)
 						.addComponent(textField_3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(rdbtnNewRadioButton_1)
+						.addComponent(lblNewLabel_2)
 						.addComponent(rdbtnNewRadioButton)
-						.addComponent(lblNewLabel_2))
-					.addGap(18)
+						.addComponent(rdbtnNewRadioButton_1))
+					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblNewLabel_1)
-						.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-						.addComponent(btnNewButton)
-						.addComponent(lblNewLabel))
-					.addContainerGap(14, Short.MAX_VALUE))
+						.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(btnNewButton))
+					.addGap(27)
+					.addComponent(lblNewLabel)
+					.addContainerGap(252, Short.MAX_VALUE))
 		);
 		setLayout(groupLayout);
 
