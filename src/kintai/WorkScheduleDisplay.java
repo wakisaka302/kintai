@@ -35,6 +35,7 @@ public class WorkScheduleDisplay extends JPanel implements ActionListener {
 	 * Create the panel.
 	 */
 	public WorkScheduleDisplay() {
+		setBackground(new Color(0, 64, 128));
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setForeground(new Color(255, 0, 0));
 
