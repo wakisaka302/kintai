@@ -36,6 +36,18 @@ public class EmployeeRegistrationDownPanel extends JPanel {
 		JRadioButton rdbtnNewRadioButton_1 = new JRadioButton("女");
 		rdbtnNewRadioButton_1.setBackground(new Color(0, 64, 128));
 		rdbtnNewRadioButton_1.setForeground(new Color(255, 255, 255));
+		
+		JLabel lblNewLabel_4_1 = new JLabel("※各項目を設定後、[ 登録 ]");
+		lblNewLabel_4_1.setFont(new Font("MS UI Gothic", Font.BOLD, 12));
+		lblNewLabel_4_1.setForeground(new Color(192, 192, 192));
+		lblNewLabel_4_1.setBackground(new Color(128, 128, 255));
+		
+		String lbl_4 = " 　社員情報をデータベースに登録します。";
+		JLabel lblNewLabel_4 = new JLabel(lbl_4);
+		lblNewLabel_4.setFont(new Font("MS UI Gothic", Font.BOLD, 12));
+		lblNewLabel_4.setForeground(new Color(192, 192, 192));
+		lblNewLabel_4.setBackground(new Color(128, 128, 255));
+				
 		textField_1 = new JTextField();
 		textField_1.setText(null);
 		textField_1.setColumns(10);
@@ -87,15 +99,18 @@ public class EmployeeRegistrationDownPanel extends JPanel {
 					}else {
 				DB.dbInsert(max, kihonkyu, seibetu, name);//dbInsert()のメソッドを使いデータベースに登録する
 				EmployeeRegistrationUpPanel.setObjectRowData(max, kihonkyu, seibetu, name);
-				raberu="登録完了しました";
-				lblNewLabel.setText(raberu);
+				raberu="登録成功：社員情報をDBに登録しました。";
+				lblNewLabel_4.setForeground(Color.WHITE);
+				lblNewLabel_4.setText(raberu);
 				textField_1.setText("");//入力した値を消す
 				textField_3.setText("");//入力した値を消す
 					}
 				}
 			}else  {//基本給が数値でなければ
-				raberu="基本給を数値で入力してください";
-				lblNewLabel.setText(raberu);
+				raberu="登録時エラー：基本給を数値で入力してください。";
+				lblNewLabel_4.setForeground(Color.PINK);
+				lblNewLabel_4.setText(raberu);
+
 			}
 		}}
 
@@ -119,15 +134,7 @@ public class EmployeeRegistrationDownPanel extends JPanel {
 		bgroup.add(rdbtnNewRadioButton);
 		bgroup.add(rdbtnNewRadioButton_1);
 		
-		JLabel lblNewLabel_4 = new JLabel(" 　社員情報をデータベースに登録します。");
-		lblNewLabel_4.setFont(new Font("MS UI Gothic", Font.BOLD, 12));
-		lblNewLabel_4.setForeground(new Color(192, 192, 192));
-		lblNewLabel_4.setBackground(new Color(128, 128, 255));
-		
-		JLabel lblNewLabel_4_1 = new JLabel("※各項目を設定後、[ 登録 ]");
-		lblNewLabel_4_1.setFont(new Font("MS UI Gothic", Font.BOLD, 12));
-		lblNewLabel_4_1.setForeground(new Color(192, 192, 192));
-		lblNewLabel_4_1.setBackground(new Color(128, 128, 255));
+
 		
 		
 
