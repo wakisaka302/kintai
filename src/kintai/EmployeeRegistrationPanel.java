@@ -1,5 +1,7 @@
 package kintai;
 
+import java.awt.Color;
+
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JPanel;
@@ -13,11 +15,13 @@ public class EmployeeRegistrationPanel extends JPanel {
 	 * Create the panel.
 	 */
 	public EmployeeRegistrationPanel() {
+		setBackground(new Color(0, 64, 128));
 
 		
 		JPanel downpane = new EmployeeRegistrationDownPanel();
 		
 		JPanel uppane = new EmployeeRegistrationUpPanel();
+		uppane.setBackground(new Color(0, 64, 128));
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
