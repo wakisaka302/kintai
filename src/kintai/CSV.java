@@ -15,77 +15,53 @@ public class CSV {
 	private String YearMonth;
 
 
+
+	//コンストラクタ(引数：ファイルパス)
+	CSV(String filepath){
+		fc = new FileChooser();
+		attendance_filepath = filepath;
+		db = new DbOperation();
+	}
+
+
+	//コンストラクタ(引数：ファイルパス、年月)
 	CSV(String filepath, String ym){
 		fc = new FileChooser();
 		attendance_filepath = filepath;
-		//		System.out.println("コンストラクタ"+attendance_filepath);
-		//		c_filepath = "";
 		YearMonth =  ym;
 		db = new DbOperation();
 	}
 
 
+
+	//CSVファイルから読み込むメソッド
 	public void csvAttendance_dataReader() throws Exception {
-		//		System.out.println(attendance_filepath);	
 		File file = new File(attendance_filepath);
-//		FileInputStream is = new FileInputStream(file);
-//        InputStreamReader in = new InputStreamReader(is, "UTF-8");
+		//		FileInputStream is = new FileInputStream(file);
+		//        InputStreamReader in = new InputStreamReader(is, "UTF-8");
 		try (BufferedReader br = new BufferedReader(new FileReader(file))){
 			String line;
 			int count = -1;
 			String id="";
-
 			while ((line = br.readLine()) != null) {
-				System.out.println(line);
 				count++;
 				String[] s = line.split(",");
 				if(count==0) {//idをとってくる
 					id = s[0];
-					//				System.out.println(id);
-
-				} else {//出退勤情報をとってくる(id以外の行をとってくる)
-					//ファイルチューザーからym(年月の値)をとってくる
-					//年、月、日をつなぐときはハイフン「-」で
-
+				} else {
 					if(DateEception(s)) {
-						System.out.println("日付");
 					} else {
 						String day = YearMonth+"-"+count;
-						System.out.println(day);
 						db.attendance_dataInsert(id, day);
 						continue;
 					}
-
-					System.out.println("=======");
 					String day = YearMonth+"-"+s[0];
-					System.out.println(day);
-
-
-
 					if(s.length>2) {  //出退勤両方記載されている場合
-						System.out.println("aaaaa");
-//						if(ALexception(s)) {
-//							System.out.println("a");
-							db.attendance_dataInsert(id, day, s[1],s[2]);
-//						} else {
-//							System.out.println("b");
-//							db.attendance_dataInsert(id, day);
-//						}
-//						System.out.println(count);
-							System.out.println("aaaac");
+						db.attendance_dataInsert(id, day, s[1],s[2]);
 					} else {  //出退勤両方記載されていない場合
-						System.out.println("aaaab");
 						db.attendance_dataInsert(id, day);
 					}
 				}
-				
-				
-				System.out.println("------------------");
-				
-				
-				//			if(count>0) {
-				//				db.dbGoodsInsert(Integer.parseInt(s[0]), s[1], Integer.parseInt(s[2]), Integer.parseInt(s[3]));				
-				//			}
 			}
 			br.close();
 		} catch (IOException ex) {
@@ -93,6 +69,31 @@ public class CSV {
 		}
 	}
 
+
+	//CSVからidだけを読み取るメソッド
+	public String csvAttendance_data_id_only_Reader() throws Exception {
+		File file = new File(attendance_filepath);
+		//		FileInputStream is = new FileInputStream(file);
+		//        InputStreamReader in = new InputStreamReader(is, "UTF-8");
+		String id="";
+		try (BufferedReader br = new BufferedReader(new FileReader(file))){
+			String line;
+			int count = -1;
+			while ((line = br.readLine()) != null) {
+				count++;
+				String[] s = line.split(",");
+				if(count==0) {//idをとってくる
+					id = s[0];
+				} else {
+					break;
+				}
+			}
+			br.close();
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		}
+		return id;
+	}
 
 
 
@@ -105,7 +106,7 @@ public class CSV {
 			System.out.println("日付が正しくありません");
 			return false;
 		} else {
-			System.out.println("日付は正しいです");
+//			System.out.println("日付は正しいです");
 			return true;
 		}
 	}
@@ -130,35 +131,9 @@ public class CSV {
 			System.out.println("出退勤問題ありません");
 			return true;
 		}	
-
-
-
 	}
 
 
-
-
-
-	//	public void csvCompanyReader() {
-	//		File file = new File(c_filepath);
-	//		try (BufferedReader br = new BufferedReader(new FileReader(file))){
-	//		String line;
-	//		int count = 0;
-	//		while ((line = br.readLine()) != null) {
-	//			String[] s = line.split(",");
-	//			if(count>0) {
-	//				db.dbCompanyInsert(Integer.parseInt(s[0]), Integer.parseInt(s[1]), s[2]);
-	//			}
-	//			count++;
-	//		
-	//			//System.out.println(line);
-	//		}
-	//		br.close();
-	//		} catch (IOException ex) {
-	//		ex.printStackTrace();
-	//		}
-	//
-	//	}
 
 
 
