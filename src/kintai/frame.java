@@ -2,6 +2,7 @@
 package kintai;
 
 import java.awt.CardLayout;
+import java.awt.Color;
 import java.awt.EventQueue;
 
 import javax.swing.GroupLayout;
@@ -43,6 +44,7 @@ public class frame extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 550, 500);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(0, 64, 128));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);

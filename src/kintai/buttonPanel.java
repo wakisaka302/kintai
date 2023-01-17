@@ -28,6 +28,7 @@ public class buttonPanel extends JPanel implements ActionListener{
 	 * Create the panel.
 	 */
 	public buttonPanel() {
+		setBackground(new Color(0, 64, 128));
 		
 		//社員情報登録
 		btnNewButton = new JButton("社員情報登録");
