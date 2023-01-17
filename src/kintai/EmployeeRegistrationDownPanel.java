@@ -119,6 +119,16 @@ public class EmployeeRegistrationDownPanel extends JPanel {
 		bgroup.add(rdbtnNewRadioButton);
 		bgroup.add(rdbtnNewRadioButton_1);
 		
+		JLabel lblNewLabel_4 = new JLabel(" 　社員情報をデータベースに登録します。");
+		lblNewLabel_4.setFont(new Font("MS UI Gothic", Font.BOLD, 12));
+		lblNewLabel_4.setForeground(new Color(192, 192, 192));
+		lblNewLabel_4.setBackground(new Color(128, 128, 255));
+		
+		JLabel lblNewLabel_4_1 = new JLabel("※各項目を設定後、[ 登録 ]");
+		lblNewLabel_4_1.setFont(new Font("MS UI Gothic", Font.BOLD, 12));
+		lblNewLabel_4_1.setForeground(new Color(192, 192, 192));
+		lblNewLabel_4_1.setBackground(new Color(128, 128, 255));
+		
 		
 
 		GroupLayout groupLayout = new GroupLayout(this);
@@ -147,7 +157,13 @@ public class EmployeeRegistrationDownPanel extends JPanel {
 							.addComponent(rdbtnNewRadioButton_1, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE)
 							.addGap(17))
 						.addComponent(btnNewButton, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-					.addContainerGap())
+					.addGap(12))
+				.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
+					.addContainerGap(188, Short.MAX_VALUE)
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addComponent(lblNewLabel_4, GroupLayout.PREFERRED_SIZE, 241, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblNewLabel_4_1, GroupLayout.PREFERRED_SIZE, 204, GroupLayout.PREFERRED_SIZE))
+					.addGap(21))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
@@ -166,7 +182,11 @@ public class EmployeeRegistrationDownPanel extends JPanel {
 						.addComponent(btnNewButton))
 					.addGap(27)
 					.addComponent(lblNewLabel)
-					.addContainerGap(252, Short.MAX_VALUE))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(lblNewLabel_4_1)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(lblNewLabel_4)
+					.addContainerGap(214, Short.MAX_VALUE))
 		);
 		setLayout(groupLayout);
 
