@@ -66,7 +66,9 @@ public class buttonPanel extends JPanel implements ActionListener{
 		btnNewButton_2.setEnabled(false);
 		btnNewButton_2.addActionListener(this);		
 		btnNewButton_2.setActionCommand("FileChooser");
-
+		
+		
+		//給与明細
 		btnNewButton_3 = new JButton("給与明細表示");
 		btnNewButton_3.setForeground(new Color(255, 255, 255));
 		btnNewButton_3.setFont(new Font("MS UI Gothic", Font.BOLD, 14));
@@ -132,11 +134,29 @@ public class buttonPanel extends JPanel implements ActionListener{
 			System.out.println("a");
 			frame.panel.add(new EmployeeRegistrationPanel(), "EmployeeRegistrationPanel");
 			System.out.println("b");
+			
+			//選択したボタンの色変更↓
+			btnNewButton.setForeground(Color.CYAN);
+			btnNewButton_2.setForeground(new Color(255, 255, 255));
+			btnNewButton_1.setForeground(new Color(255, 255, 255));
+
 			//frame.panel.add(cmd, new EmployeeRegistrationPanel());
 		}  else if(cmd.equals("FileChooser")) {
 		  	frame.panel.add(new FileChooser(), "FileChooser");
+		  	
+			//選択したボタンの色変更↓
+		  	btnNewButton_2.setForeground(Color.CYAN);
+			btnNewButton.setForeground(new Color(255, 255, 255));
+			btnNewButton_1.setForeground(new Color(255, 255, 255));
+		  	
 		}  else if(cmd.equals("workSchedule")) {
 		  	frame.panel.add(new WorkScheduleDisplay(), "workSchedule");
+		  	
+			//選択したボタンの色変更↓
+		  	btnNewButton_1.setForeground(Color.CYAN);
+		  	btnNewButton_2.setForeground(new Color(255, 255, 255));
+			btnNewButton.setForeground(new Color(255, 255, 255));
+			
 		}
 		
 		
