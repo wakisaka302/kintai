@@ -1,6 +1,8 @@
 package kintai;
 
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -8,6 +10,7 @@ import java.util.ArrayList;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -17,7 +20,6 @@ import javax.swing.table.DefaultTableColumnModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumn;
-import java.awt.Color;
 
 
 public class EmployeeRegistrationUpPanel extends JPanel {
@@ -62,6 +64,7 @@ public class EmployeeRegistrationUpPanel extends JPanel {
 		sp.setPreferredSize(new Dimension(400,250));
 
 		JButton btnNewButton = new JButton("削除");
+		btnNewButton.setFont(new Font("MS UI Gothic", Font.BOLD, 12));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				DB.dbAttendanceDelete(table.getValueAt(table.getSelectedRow(), 0));//IDでAttendance_dataから削除
@@ -71,25 +74,48 @@ public class EmployeeRegistrationUpPanel extends JPanel {
 				
 			}
 		});
+		
+		JLabel lblNewLabel_4_1 = new JLabel("※リストより社員を選択後、[削除]");
+		lblNewLabel_4_1.setForeground(Color.LIGHT_GRAY);
+		lblNewLabel_4_1.setFont(new Font("MS UI Gothic", Font.BOLD, 12));
+		lblNewLabel_4_1.setBackground(new Color(128, 128, 255));
+		
+		JLabel lblNewLabel_4_1_1 = new JLabel("　データベースから社員情報を削除します。");
+		lblNewLabel_4_1_1.setForeground(Color.LIGHT_GRAY);
+		lblNewLabel_4_1_1.setFont(new Font("MS UI Gothic", Font.BOLD, 12));
+		lblNewLabel_4_1_1.setBackground(new Color(128, 128, 255));
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
-				groupLayout.createParallelGroup(Alignment.LEADING)
+			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
-						.addContainerGap()
-						.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-								.addComponent(sp, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 497, Short.MAX_VALUE)
-								.addComponent(btnNewButton, Alignment.TRAILING))
-						.addContainerGap())
-				);
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(78)
+							.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 155, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+								.addGroup(groupLayout.createSequentialGroup()
+									.addComponent(lblNewLabel_4_1, GroupLayout.PREFERRED_SIZE, 175, GroupLayout.PREFERRED_SIZE)
+									.addGap(36))
+								.addComponent(lblNewLabel_4_1_1)))
+						.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
+							.addGap(21)
+							.addComponent(sp, GroupLayout.DEFAULT_SIZE, 444, Short.MAX_VALUE)))
+					.addContainerGap())
+		);
 		groupLayout.setVerticalGroup(
-				groupLayout.createParallelGroup(Alignment.LEADING)
+			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
-						.addGap(5)
-						.addComponent(sp, GroupLayout.PREFERRED_SIZE, 162, GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(ComponentPlacement.UNRELATED)
-						.addComponent(btnNewButton)
-						.addContainerGap(52, Short.MAX_VALUE))
-				);
+					.addComponent(sp, GroupLayout.PREFERRED_SIZE, 162, GroupLayout.PREFERRED_SIZE)
+					.addGap(10)
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addComponent(lblNewLabel_4_1)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(lblNewLabel_4_1_1))
+						.addComponent(btnNewButton))
+					.addContainerGap(96, Short.MAX_VALUE))
+		);
 		setLayout(groupLayout);
 	}
 	//ArrayList→Objectに変換する
@@ -118,5 +144,4 @@ public class EmployeeRegistrationUpPanel extends JPanel {
 		obb[3] = kihonkyu;
 		tablemodel.addRow(obb);
 	}
-
 }
