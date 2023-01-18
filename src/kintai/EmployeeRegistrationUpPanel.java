@@ -62,18 +62,6 @@ public class EmployeeRegistrationUpPanel extends JPanel {
 		JScrollPane sp=new JScrollPane(table);
 		
 		sp.setPreferredSize(new Dimension(400,250));
-
-		JButton btnNewButton = new JButton("削除");
-		btnNewButton.setFont(new Font("MS UI Gothic", Font.BOLD, 12));
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				DB.dbAttendanceDelete(table.getValueAt(table.getSelectedRow(), 0));//IDでAttendance_dataから削除
-				DB.dbDelete(table.getValueAt(table.getSelectedRow(), 0));
-				tablemodel.removeRow(table.getSelectedRow());
-				
-				
-			}
-		});
 		
 		JLabel lblNewLabel_4_1 = new JLabel("※リストより社員を選択後、[削除]");
 		lblNewLabel_4_1.setForeground(Color.LIGHT_GRAY);
@@ -84,6 +72,26 @@ public class EmployeeRegistrationUpPanel extends JPanel {
 		lblNewLabel_4_1_1.setForeground(Color.LIGHT_GRAY);
 		lblNewLabel_4_1_1.setFont(new Font("MS UI Gothic", Font.BOLD, 12));
 		lblNewLabel_4_1_1.setBackground(new Color(128, 128, 255));
+
+		JButton btnNewButton = new JButton("削除");
+		btnNewButton.setFont(new Font("MS UI Gothic", Font.BOLD, 12));
+		btnNewButton.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e) {
+				
+				DB.dbAttendanceDelete(table.getValueAt(table.getSelectedRow(), 0));//IDでAttendance_dataから削除
+				DB.dbDelete(table.getValueAt(table.getSelectedRow(), 0));
+				tablemodel.removeRow(table.getSelectedRow());
+				
+				//削除実行時メッセージ　※※市田さん、削除成功時と失敗時でif文を分けて、コンソールにエラーが出ないように訂正してください。
+				//↓↓↓
+				lblNewLabel_4_1_1.setText("削除成功：社員情報を削除しました。");//脇坂追加文
+				lblNewLabel_4_1_1.setForeground(Color.WHITE);//脇坂追加分
+				
+			}
+		});
+		
+		
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
