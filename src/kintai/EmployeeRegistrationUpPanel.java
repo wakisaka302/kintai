@@ -1,5 +1,6 @@
 package kintai;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,7 +18,6 @@ import javax.swing.table.DefaultTableColumnModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumn;
-import java.awt.Color;
 
 
 public class EmployeeRegistrationUpPanel extends JPanel {
@@ -64,11 +64,14 @@ public class EmployeeRegistrationUpPanel extends JPanel {
 		JButton btnNewButton = new JButton("削除");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				int a=0;
+			    a=table.getSelectedRow();
+				if(a>=0) {
 				DB.dbAttendanceDelete(table.getValueAt(table.getSelectedRow(), 0));//IDでAttendance_dataから削除
-				DB.dbDelete(table.getValueAt(table.getSelectedRow(), 0));
-				tablemodel.removeRow(table.getSelectedRow());
-				
-				
+				DB.dbDelete(table.getValueAt(table.getSelectedRow(), 0));//IDでemployee_dataから削除
+				tablemodel.removeRow(table.getSelectedRow());//画面から削除
+				}
 			}
 		});
 		GroupLayout groupLayout = new GroupLayout(this);
@@ -108,7 +111,7 @@ public class EmployeeRegistrationUpPanel extends JPanel {
 		return ob;
 
 	}
-
+	//新しく追加した情報を画面に追加する
 	public static void setObjectRowData(int max, int kihonkyu, String seibetu, String name) {
 		
 		Object[] obb = new Object[4];
@@ -116,7 +119,8 @@ public class EmployeeRegistrationUpPanel extends JPanel {
 		obb[1] = name;
 		obb[2] = seibetu;
 		obb[3] = kihonkyu;
-		tablemodel.addRow(obb);
-	}
+		tablemodel.addRow(obb);//	データモデルの最後の行の後ろに行を追加	
 
+}
+	
 }

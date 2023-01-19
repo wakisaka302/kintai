@@ -98,7 +98,7 @@ public class EmployeeRegistrationDownPanel extends JPanel {
 	    				lblNewLabel.setText(raberu);
 					}else {
 				DB.dbInsert(max, kihonkyu, seibetu, name);//dbInsert()のメソッドを使いデータベースに登録する
-				EmployeeRegistrationUpPanel.setObjectRowData(max, kihonkyu, seibetu, name);
+				EmployeeRegistrationUpPanel.setObjectRowData(max, kihonkyu, seibetu, name);//登録した情報を画面に表示
 				raberu="登録成功：社員情報をDBに登録しました。";
 				lblNewLabel_4.setForeground(Color.WHITE);
 				lblNewLabel_4.setText(raberu);
