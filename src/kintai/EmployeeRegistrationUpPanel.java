@@ -58,16 +58,16 @@ public class EmployeeRegistrationUpPanel extends JPanel {
 		//スクロールパネルにテーブルを追加
 		JTableHeader jheader = table.getTableHeader();
 		jheader.setReorderingAllowed(false);//カラムの固定
-		
+
 		JScrollPane sp=new JScrollPane(table);
-		
+
 		sp.setPreferredSize(new Dimension(400,250));
-		
+
 		JLabel lblNewLabel_4_1 = new JLabel("※リストより社員を選択後、[削除]");
 		lblNewLabel_4_1.setForeground(Color.LIGHT_GRAY);
 		lblNewLabel_4_1.setFont(new Font("MS UI Gothic", Font.BOLD, 12));
 		lblNewLabel_4_1.setBackground(new Color(128, 128, 255));
-		
+
 		JLabel lblNewLabel_4_1_1 = new JLabel("　データベースから社員情報を削除します。");
 		lblNewLabel_4_1_1.setForeground(Color.LIGHT_GRAY);
 		lblNewLabel_4_1_1.setFont(new Font("MS UI Gothic", Font.BOLD, 12));
@@ -76,56 +76,57 @@ public class EmployeeRegistrationUpPanel extends JPanel {
 		JButton btnNewButton = new JButton("削除");
 		btnNewButton.setFont(new Font("MS UI Gothic", Font.BOLD, 12));
 		btnNewButton.addActionListener(new ActionListener() {
-			
+
 			public void actionPerformed(ActionEvent e) {
 				int a=0;
-			    a=table.getSelectedRow();
+				a=table.getSelectedRow();
 				if(a>=0) {
-				DB.dbAttendanceDelete(table.getValueAt(table.getSelectedRow(), 0));//IDでAttendance_dataから削除
-				DB.dbDelete(table.getValueAt(table.getSelectedRow(), 0));
-				tablemodel.removeRow(table.getSelectedRow());
-				
-				//削除実行時メッセージ　※※市田さん、削除成功時と失敗時でif文を分けて、コンソールにエラーが出ないように訂正してください。
-				//↓↓↓
-				lblNewLabel_4_1_1.setText("削除成功：社員情報を削除しました。");//脇坂追加文
-				lblNewLabel_4_1_1.setForeground(Color.WHITE);//脇坂追加分
+					DB.dbAttendanceDelete(table.getValueAt(table.getSelectedRow(), 0));//IDでAttendance_dataから削除
+					DB.dbDelete(table.getValueAt(table.getSelectedRow(), 0));
+					tablemodel.removeRow(table.getSelectedRow());
+
+					lblNewLabel_4_1_1.setText("削除成功：社員情報を削除しました。");//脇坂追加文
+					lblNewLabel_4_1_1.setForeground(Color.WHITE);//脇坂追加分
+				}else {
+					lblNewLabel_4_1_1.setText("削除失敗：リストより社員を選択して下さい。");//脇坂追加文
+					lblNewLabel_4_1_1.setForeground(Color.PINK);//脇坂追加分
 				}
 			}
 		});
-		
-		
+
+
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
+				groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(78)
-							.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 155, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+						.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 								.addGroup(groupLayout.createSequentialGroup()
-									.addComponent(lblNewLabel_4_1, GroupLayout.PREFERRED_SIZE, 175, GroupLayout.PREFERRED_SIZE)
-									.addGap(36))
-								.addComponent(lblNewLabel_4_1_1)))
-						.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
-							.addGap(21)
-							.addComponent(sp, GroupLayout.DEFAULT_SIZE, 444, Short.MAX_VALUE)))
-					.addContainerGap())
-		);
+										.addGap(78)
+										.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 155, GroupLayout.PREFERRED_SIZE)
+										.addPreferredGap(ComponentPlacement.UNRELATED)
+										.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+												.addGroup(groupLayout.createSequentialGroup()
+														.addComponent(lblNewLabel_4_1, GroupLayout.PREFERRED_SIZE, 175, GroupLayout.PREFERRED_SIZE)
+														.addGap(36))
+												.addComponent(lblNewLabel_4_1_1)))
+								.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
+										.addGap(21)
+										.addComponent(sp, GroupLayout.DEFAULT_SIZE, 444, Short.MAX_VALUE)))
+						.addContainerGap())
+				);
 		groupLayout.setVerticalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
+				groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addComponent(sp, GroupLayout.PREFERRED_SIZE, 162, GroupLayout.PREFERRED_SIZE)
-					.addGap(10)
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(lblNewLabel_4_1)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(lblNewLabel_4_1_1))
-						.addComponent(btnNewButton))
-					.addContainerGap(96, Short.MAX_VALUE))
-		);
+						.addComponent(sp, GroupLayout.PREFERRED_SIZE, 162, GroupLayout.PREFERRED_SIZE)
+						.addGap(10)
+						.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+								.addGroup(groupLayout.createSequentialGroup()
+										.addComponent(lblNewLabel_4_1)
+										.addPreferredGap(ComponentPlacement.RELATED)
+										.addComponent(lblNewLabel_4_1_1))
+								.addComponent(btnNewButton))
+						.addContainerGap(96, Short.MAX_VALUE))
+				);
 		setLayout(groupLayout);
 	}
 	//ArrayList→Objectに変換する
@@ -140,13 +141,13 @@ public class EmployeeRegistrationUpPanel extends JPanel {
 			ob[i][3]=list.get(i).getKihon();
 
 		}
-		
+
 		return ob;
 
 	}
 
 	public static void setObjectRowData(int max, int kihonkyu, String seibetu, String name) {
-		
+
 		Object[] obb = new Object[4];
 		obb[0] = max;
 		obb[1] = name;
