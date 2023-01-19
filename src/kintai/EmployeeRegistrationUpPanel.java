@@ -88,7 +88,7 @@ public class EmployeeRegistrationUpPanel extends JPanel {
 					lblNewLabel_4_1_1.setText("削除成功：社員情報を削除しました。");//脇坂追加文
 					lblNewLabel_4_1_1.setForeground(Color.WHITE);//脇坂追加分
 				}else {
-					lblNewLabel_4_1_1.setText("削除失敗：リストより社員を選択して下さい。");//脇坂追加文
+					lblNewLabel_4_1_1.setText("削除時エラー：リストより社員を選択して下さい。");//脇坂追加文
 					lblNewLabel_4_1_1.setForeground(Color.PINK);//脇坂追加分
 				}
 			}
