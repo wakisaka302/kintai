@@ -78,7 +78,9 @@ public class EmployeeRegistrationUpPanel extends JPanel {
 		btnNewButton.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
-				
+				int a=0;
+			    a=table.getSelectedRow();
+				if(a>=0) {
 				DB.dbAttendanceDelete(table.getValueAt(table.getSelectedRow(), 0));//IDでAttendance_dataから削除
 				DB.dbDelete(table.getValueAt(table.getSelectedRow(), 0));
 				tablemodel.removeRow(table.getSelectedRow());
@@ -87,7 +89,7 @@ public class EmployeeRegistrationUpPanel extends JPanel {
 				//↓↓↓
 				lblNewLabel_4_1_1.setText("削除成功：社員情報を削除しました。");//脇坂追加文
 				lblNewLabel_4_1_1.setForeground(Color.WHITE);//脇坂追加分
-				
+				}
 			}
 		});
 		
