@@ -37,7 +37,7 @@ public class EmployeeRegistrationDownPanel extends JPanel {
 		rdbtnNewRadioButton_1.setBackground(new Color(0, 64, 128));
 		rdbtnNewRadioButton_1.setForeground(new Color(255, 255, 255));
 		
-		JLabel lblNewLabel_4_1 = new JLabel("※各項目を設定後、[ 登録 ]");
+		JLabel lblNewLabel_4_1 = new JLabel("※各項目を設定後、[登録]");
 		lblNewLabel_4_1.setFont(new Font("MS UI Gothic", Font.BOLD, 12));
 		lblNewLabel_4_1.setForeground(new Color(192, 192, 192));
 		lblNewLabel_4_1.setBackground(new Color(128, 128, 255));
@@ -90,8 +90,10 @@ public class EmployeeRegistrationDownPanel extends JPanel {
 				String name=textField_3.getText();//nameにtextField_3を代入
 				String name2=name.replaceAll("[ 　]", "");//nameの空白を削除
                 if(name2.length()==0) {//nameの文字列が0であればラベルに名前を入力してくださいを表示
-                	raberu="名前を入力してください";
-    				lblNewLabel.setText(raberu);
+                	raberu="登録時エラー：社員名を入力してください。";
+    				lblNewLabel_4.setForeground(Color.PINK);
+    				lblNewLabel_4.setText(raberu);
+    				
 				}else {
 					if(kihonkyu<0) {//基本給がマイナスなら
 						raberu="エラー：正しいパスワードを入力してください";
