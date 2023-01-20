@@ -110,33 +110,25 @@ public class meisaiPanel extends JPanel implements ActionListener{
 				try {
 					textField_11.setText(db.GetSalary(list.get(comboBox.getSelectedIndex()).getEmploye_number()));
 					basicSalary = Integer.parseInt(db.GetSalary(list.get(comboBox.getSelectedIndex()).getEmploye_number()));
-					System.out.println(basicSalary);
-
 				} catch (Exception e1) {
 					e1.printStackTrace();
 				}
-
-
-				System.out.println("IsSalary"+IsSalary(basicSalary));
 
 
 				if(IsSalary(basicSalary)) {
 					//健康保険料を表示
 					healthInsurance = InsuranceCal(basicSalary);
 					textField_17.setText(String.valueOf(healthInsurance));
-					System.out.println(String.valueOf(healthInsurance));
 
 
 					//厚生年金を表示
 					pensionInsurance = PensionCal(basicSalary);
 					textField_19.setText(String.valueOf(pensionInsurance));
-					System.out.println(String.valueOf(pensionInsurance));
 
 
 					//雇用保険料を表示
 					employmentInsurance = Math.round(basicSalary*5/1000);
 					textField_21.setText(String.valueOf(employmentInsurance));
-					System.out.println(employmentInsurance);
 
 
 					//総支給額
@@ -145,14 +137,14 @@ public class meisaiPanel extends JPanel implements ActionListener{
 
 					//総控除額
 					deduction =  healthInsurance+pensionInsurance+employmentInsurance;
-					System.out.println("deduction:"+deduction);
 					textField_23.setText("総控除額   " + deduction);
 
 
 					//差引支給額
 					total = basicSalary - deduction;
-					System.out.println(total);
 					textField_24.setText("差引支給額   " + total);
+					
+					
 				} else {
 					//健康保険料を表示
 					textField_17.setText("基本給から計算できません");
