@@ -2,7 +2,7 @@ package kintai;
 
 public class PensionAndHealthInsurance {
 	public static int PensionAndHealthInsurance[][] = {
-			{138000,146000,7256,12993},		//11等級
+			{138000,146000,7256,12993},		//11等級！
 			{146000,155000,7665,13725},		//12等級
 			{155000,165000,8176,14640},		//13等級
 			{165000,175000,8687,15555},		//14等級
