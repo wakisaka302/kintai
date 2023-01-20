@@ -18,6 +18,7 @@ public class DbOperation {
 	String url = "jdbc:postgresql://localhost:5432/postgres" ;	//DBのURL
 	String user = "postgres" ;		//DBのユーザー名
 	String password = "postgrestest" ;	//DBのパスワード
+	String Month[] = {"01","02","03","04","05","06","07","08","09","10","11","12"};
 
 
 	//出退勤をDBに挿入するメソッド(引数４つ)
@@ -89,6 +90,24 @@ public class DbOperation {
 			return true;
 		}
 	}
+	
+	
+	//ファイル名の月を判別するメソッド
+		public boolean IsFileNameMonthTrue(String fileNameMonth) {
+			int count = 0;
+			for(int i=0;i<Month.length;i++) {
+				if(fileNameMonth.equals(Month[i])) {
+					count++;
+				}
+			}
+			if(count!=0) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+	
+	
 
 
 	//ファイル名の名前からidをDBから検索し、それとファイル内のidと比べるメソッド

@@ -74,6 +74,7 @@ public class FileChooser extends JPanel implements ActionListener{
 			String extension = file.getName().substring(fcl-3);   //拡張子を表す
 			String fileName = file.getName();
 			String fileNameYearMonth = file.getName().substring(0,6);
+			String fileNameMonth = file.getName().substring(4,6);
 			String fileNameEmployeeName = file.getName().substring(6, fcl-4);
 			System.out.println(fcl);
 			System.out.println(fileNameYearMonth);
@@ -94,16 +95,32 @@ public class FileChooser extends JPanel implements ActionListener{
 
 
 			//ファイル名の判別する
-			if(errorCount1!=0) {
-			} else {
+			if(errorCount1==0) {
+				int errorCountA=0;
+				int errorCountB=0;
 				if(db.IsFileNameTrue(fcl, fileNameYearMonth)) {
 				} else {
-					System.out.println("ファイル名が適切ではありません");
+					errorCountA++;
+				}
+				if(db.IsFileNameMonthTrue(fileNameMonth)) {
+				} else {
+					errorCountB++;
+				}
+
+				if(errorCountA!=0) {
+					errorCount1++;
 					label.setForeground(Color.WHITE);
 					label.setText("ファイル名が適切ではありません");
-					errorCount2++;
+				} else if(errorCountB!=0) {
+					errorCount1++;
+					label.setForeground(Color.WHITE);
+					label.setText("月が適切ではありません");
 				}
 			}
+
+			
+			
+			
 
 
 			//ファイル内とDBとの比較
@@ -120,7 +137,6 @@ public class FileChooser extends JPanel implements ActionListener{
 					e3.printStackTrace();
 				}
 
-
 				try {  //ファイル内idとDB上idとの比較
 					if(db.getNameIntoId(fileNameEmployeeName) == Integer.parseInt(id)) {
 						System.out.println("id一致");
@@ -136,14 +152,12 @@ public class FileChooser extends JPanel implements ActionListener{
 					e1.printStackTrace();
 				}
 
-
 				if(db.IsFileTrue(id, date)) {  //CSVファイル内のid,年月をDB上のid,年月と比較
 					System.out.println("IsFileTrue:読み込み可");
 				} else {
 					System.out.println("IsFileTrue:読み込み不可");
 					errorCountB++;
 				}
-
 
 				if(errorCountA!=0) {
 					label.setForeground(Color.WHITE);
