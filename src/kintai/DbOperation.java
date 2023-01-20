@@ -62,6 +62,100 @@ public class DbOperation {
 
 
 	////CSVを読み込む際、ファイル名を選別するメソッド
+	//拡張子がCSVか判別するメソッド
+	public boolean IsCSVTrue(String extension) {
+		if( extension.equals("csv")) {     //拡張子でファイルを判別
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+
+	//ファイル名を判別するメソッド
+	public boolean IsFileNameTrue(int fcl, String fileNameYearMonth) {
+		int count = 0;
+		if(fcl<=10) {
+			count++;
+		}
+		if(fileNameYearMonth.matches("[+-]?\\d*(\\.\\d+)?")) {
+		} else {
+			count++;
+		}
+		System.out.println(count);
+		if(count>0) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+
+
+	//ファイル名の名前からidをDBから検索し、それとファイル内のidと比べるメソッド
+	public int getNameIntoId(String fileNameEmployeeName) {
+		Connection con=null;
+		Statement stmt=null;
+		ResultSet result= null;
+		ArrayList<Integer> list = new ArrayList<>();
+		String nameIntoId = "";
+		String sql = "select employe_number from employee_data where name = '" + fileNameEmployeeName +"'";
+		try {
+			con = DriverManager.getConnection ( url, user, password );
+			stmt = con.createStatement();
+			result = stmt.executeQuery ( sql );
+			while ( result.next() ) {
+				nameIntoId = result.getString(1);
+			}
+		} catch ( SQLException e ){
+			e.printStackTrace() ;
+		}finally{
+			try {
+				if(con != null) con.close();
+				if(stmt != null) stmt.close();
+				if(result != null) result.close();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		System.out.println("id:"+nameIntoId);
+		return Integer.parseInt(nameIntoId);
+	}
+
+
+	//CSVファイルの年月とattendance_dataの年月を比べるメソッド
+	public boolean IsFileTrue(String id, Date date) {
+		Connection con=null;
+		Statement stmt=null;
+		ResultSet result= null;
+		ArrayList<Integer> list = new ArrayList<>();
+		int number = 0;
+		String sql = "select count(*) from attendance_data where employee_id = "+ (Integer.parseInt(id)) + " and date_trunc('month', date) = Date '"+date+"'";
+		try {
+			con = DriverManager.getConnection ( url, user, password );
+			stmt = con.createStatement();
+			result = stmt.executeQuery ( sql );
+			while ( result.next() ) {
+				number = result.getInt(1);
+			}
+		} catch ( SQLException e ){
+			e.printStackTrace() ;
+		}finally{
+			try {
+				if(con != null) con.close();
+				if(stmt != null) stmt.close();
+				if(result != null) result.close();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		if(number>0) {
+			return false;
+		} else {
+			return true;
+		}	
+	}
+
+
 	//ファイル内IDとemployee_data.employe_numberを比較するメソッド
 	public boolean IsId(String id) {
 		Connection con=null;
@@ -254,6 +348,10 @@ public class DbOperation {
 		}
 		return salary;
 	}
+
+
+
+
 
 
 
