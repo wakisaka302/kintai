@@ -17,22 +17,25 @@ import javax.swing.JPanel;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
 public class FileChooser extends JPanel implements ActionListener{
-	JLabel label;
+	JLabel lbldbcsv;
 	private String ym;
 	private String filepath;
-	private String result = "";
+	private String result;
 	DbOperation db = new DbOperation();
 	ArrayList<AData> list;
 
 	FileChooser(){
 		setBackground(new Color(0, 64, 128));
 
-		label = new JLabel();
+		lbldbcsv = new JLabel();
+		lbldbcsv.setFont(new Font("MS UI Gothic", Font.BOLD, 13));
+		lbldbcsv.setForeground(new Color(192, 192, 192));
+		lbldbcsv.setText("※DBに社員を登録します。CSVファイルを選択して下さい。");
 
 		JPanel labelPanel = new JPanel();
 		labelPanel.setForeground(new Color(255, 255, 255));
 		labelPanel.setBackground(new Color(0, 64, 128));
-		labelPanel.add(label);
+		labelPanel.add(lbldbcsv);
 		JButton btnFileSelect = new JButton("file select");
 		btnFileSelect.setForeground(new Color(192, 192, 192));
 		btnFileSelect.setFont(new Font("MS UI Gothic", Font.BOLD, 34));
@@ -40,26 +43,23 @@ public class FileChooser extends JPanel implements ActionListener{
 		btnFileSelect.addActionListener(this);
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
-				groupLayout.createParallelGroup(Alignment.TRAILING)
+			groupLayout.createParallelGroup(Alignment.TRAILING)
 				.addGroup(groupLayout.createSequentialGroup()
-						.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-								.addGroup(groupLayout.createSequentialGroup()
-										.addContainerGap()
-										.addComponent(btnFileSelect, GroupLayout.DEFAULT_SIZE, 426, Short.MAX_VALUE))
-								.addGroup(groupLayout.createSequentialGroup()
-										.addGap(25)
-										.addComponent(labelPanel, GroupLayout.PREFERRED_SIZE, 383, GroupLayout.PREFERRED_SIZE)))
-						.addContainerGap())
-				);
+					.addContainerGap()
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addComponent(btnFileSelect, GroupLayout.DEFAULT_SIZE, 426, Short.MAX_VALUE)
+						.addComponent(labelPanel, GroupLayout.PREFERRED_SIZE, 383, GroupLayout.PREFERRED_SIZE))
+					.addContainerGap())
+		);
 		groupLayout.setVerticalGroup(
-				groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
-						.addGap(30)
-						.addComponent(labelPanel, GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addComponent(btnFileSelect, GroupLayout.PREFERRED_SIZE, 212, GroupLayout.PREFERRED_SIZE)
-						.addContainerGap())
-				);
+			groupLayout.createParallelGroup(Alignment.TRAILING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addGap(30)
+					.addComponent(labelPanel, GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(btnFileSelect, GroupLayout.PREFERRED_SIZE, 212, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap())
+		);
 		setLayout(groupLayout);
 	}
 
@@ -91,8 +91,8 @@ public class FileChooser extends JPanel implements ActionListener{
 			if(db.IsCSVTrue(extension)) {  			
 			} else {
 				System.out.println("読み込めないファイルでした");
-				label.setForeground(Color.WHITE);
-				label.setText("拡張子が「.csv」のファイルを選んでください");
+				lbldbcsv.setForeground(Color.PINK);
+				lbldbcsv.setText("登録時エラー：拡張子が「.csv」のファイルを選んでください。");
 				errorCount1++;
 			}
 
@@ -112,12 +112,12 @@ public class FileChooser extends JPanel implements ActionListener{
 
 				if(errorCountA!=0) {
 					errorCount1++;
-					label.setForeground(Color.WHITE);
-					label.setText("ファイル名が適切ではありません");
+					lbldbcsv.setForeground(Color.PINK);
+					lbldbcsv.setText("登録時エラー：ファイル名が適切ではありません");
 				} else if(errorCountB!=0) {
 					errorCount1++;
-					label.setForeground(Color.WHITE);
-					label.setText("月が適切ではありません");
+					lbldbcsv.setForeground(Color.PINK);
+					lbldbcsv.setText("登録時エラー：月が適切ではありません");
 				}
 			}
 
@@ -140,8 +140,8 @@ public class FileChooser extends JPanel implements ActionListener{
 				//ファイル名内の名前がDB(employee_data)に登録済みかどうか
 				if(db.IsNameIntoId(fileNameEmployeeName).equals("")) {//未登録
 					errorCount3++;
-					label.setForeground(Color.WHITE);
-					label.setText("そのような社員は登録されていません");
+					lbldbcsv.setForeground(Color.PINK);
+					lbldbcsv.setText("登録時エラー：指定の社員名は登録されていません。");
 				} else {//登録済み
 					try {  //ファイル内idとDB上idとの比較
 						if(db.getNameIntoId(fileNameEmployeeName) == Integer.parseInt(id)) {
@@ -169,12 +169,12 @@ public class FileChooser extends JPanel implements ActionListener{
 
 					//エラーの種類を表示
 					if(errorCountA!=0) {
-						label.setForeground(Color.WHITE);
-						label.setText("ファイル内のidと登録されているidが一致しません");
+						lbldbcsv.setForeground(Color.PINK);
+						lbldbcsv.setText("登録時エラー：ファイル内のIDと、登録されているIDが一致しません。");
 						errorCount3++;
 					} else if(errorCountB!=0) {
-						label.setForeground(Color.WHITE);
-						label.setText("すでにDBに登録されているか、idが不適切です");
+						lbldbcsv.setForeground(Color.PINK);
+						lbldbcsv.setText("登録時エラー：すでにDBに登録されているか、IDが不適切です。");
 						errorCount3++;
 					}
 				}
@@ -183,7 +183,7 @@ public class FileChooser extends JPanel implements ActionListener{
 
 			//上記２つを満たした場合(errorCountがともに0)
 			if(errorCount1==0 && errorCount2==0 && errorCount3==0) {  
-				label.setText(file.getName()+"　ファイル読み込み中");
+				lbldbcsv.setText(file.getName()+"　ファイル読み込み中");
 				String y = file.getName().substring(0,4);
 				String m = file.getName().substring(4,6);
 				String ym = y + "-" + m;
@@ -193,12 +193,13 @@ public class FileChooser extends JPanel implements ActionListener{
 				try {
 					if(csv.csvAttendance_data_error_finder()) {
 						csv.csvAttendance_dataReader();
-						label.setText(file.getName()+"　DBに追加しました");
+						lbldbcsv.setForeground(Color.WHITE);
+						lbldbcsv.setText("登録成功：「 " +  file.getName()+ "」　をDBに追加しました。");
 						System.out.println("DBに追加しました");
 					} else {
-						label.setForeground(Color.RED);
-						label.setText(file.getName()+"　エラー箇所があり、DBに追加しませんでした");
-						System.out.println("エラー箇所があり、DBに追加しませんでした");
+						lbldbcsv.setForeground(Color.PINK);
+						lbldbcsv.setText(file.getName()+"　エラー箇所があり、DBに追加しませんでした。");
+						System.out.println("エラー箇所があり、DBに追加しませんでした。");
 					}
 				} catch (Exception e1) {
 					// TODO 自動生成された catch ブロック
