@@ -2,6 +2,7 @@ package kintai;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Date;
@@ -36,8 +37,9 @@ public class WorkScheduleDisplay extends JPanel implements ActionListener {
 	 */
 	public WorkScheduleDisplay() {
 		setBackground(new Color(0, 64, 128));
-		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setForeground(new Color(255, 0, 0));
+		JLabel lblNewLabel = new JLabel("指定月の勤務表を表示します。");
+		lblNewLabel.setFont(new Font("MS UI Gothic", Font.BOLD, 12));
+		lblNewLabel.setForeground(new Color(192, 192, 192));
 
 		//コンボボックス
 		//comboBox = 社員名を選択するコンボボックス
@@ -94,10 +96,12 @@ public class WorkScheduleDisplay extends JPanel implements ActionListener {
 				//display = db.dbGetWorkSchedule(list.get(comboBox.getSelectedIndex()).getEmploye_number());
 				//list.get(comboBox_1.getSelectedIndex()).getDate();
 				ConvertToObject(display);
-				lblNewLabel.setText("表示しました");
+				lblNewLabel.setText("表示成功：勤務表を表示しました。");
+				lblNewLabel.setForeground(Color.WHITE);
 				//db.dbGetWorkSchedule(comboBox.getSelectedIndex());
 				}else {
-					lblNewLabel.setText("選択されてない部分があります");
+					lblNewLabel.setText("表示エラー：選択されてない項目があります。");
+					lblNewLabel.setForeground(Color.PINK);
 				}
 				
 
@@ -106,27 +110,30 @@ public class WorkScheduleDisplay extends JPanel implements ActionListener {
 			}
 		});
 		
+		JLabel lblNewLabel_1 = new JLabel("※社員名と月を選択後、[表示]");
+		lblNewLabel_1.setFont(new Font("MS UI Gothic", Font.BOLD, 12));
+		lblNewLabel_1.setForeground(new Color(192, 192, 192));
+		
 		
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
+					.addGap(23)
+					.addComponent(scrollPane, 0, 0, Short.MAX_VALUE)
+					.addGap(23))
+				.addGroup(groupLayout.createSequentialGroup()
 					.addGap(34)
-					.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, 109, GroupLayout.PREFERRED_SIZE)
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+						.addComponent(lblNewLabel)
+						.addComponent(lblNewLabel_1)
 						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(116)
-							.addComponent(lblNewLabel))
-						.addGroup(groupLayout.createSequentialGroup()
+							.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, 109, GroupLayout.PREFERRED_SIZE)
 							.addGap(18)
 							.addComponent(comboBox_1, GroupLayout.PREFERRED_SIZE, 116, GroupLayout.PREFERRED_SIZE)
 							.addGap(18)
 							.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 117, GroupLayout.PREFERRED_SIZE)))
 					.addGap(38))
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(23)
-					.addComponent(scrollPane, 0, 0, Short.MAX_VALUE)
-					.addGap(23))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
@@ -134,10 +141,13 @@ public class WorkScheduleDisplay extends JPanel implements ActionListener {
 					.addGap(5)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblNewLabel)
 						.addComponent(btnNewButton)
 						.addComponent(comboBox_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(lblNewLabel_1)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(lblNewLabel)
+					.addPreferredGap(ComponentPlacement.RELATED, 91, Short.MAX_VALUE)
 					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 223, GroupLayout.PREFERRED_SIZE)
 					.addContainerGap())
 		);
