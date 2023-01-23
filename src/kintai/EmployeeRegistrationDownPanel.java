@@ -89,6 +89,11 @@ public class EmployeeRegistrationDownPanel extends JPanel {
 				
 				String name=textField_3.getText();//nameにtextField_3を代入
 				String name2=name.replaceAll("[ 　]", "");//nameの空白を削除
+				if(name.length()>=50) {
+					raberu="名前の文字が多すぎます。";
+					lblNewLabel_4.setForeground(Color.PINK);
+					lblNewLabel_4.setText(raberu);
+				}else {
                 if(name2.length()==0) {//nameの文字列が0であればラベルに名前を入力してくださいを表示
                 	raberu="登録時エラー：社員名を入力してください。";
     				lblNewLabel_4.setForeground(Color.PINK);
@@ -107,7 +112,7 @@ public class EmployeeRegistrationDownPanel extends JPanel {
 				textField_1.setText("");//入力した値を消す
 				textField_3.setText("");//入力した値を消す
 					}
-				}
+				}}
 			}else  {//基本給が数値でなければ
 				raberu="登録時エラー：基本給を数値で入力してください。";
 				lblNewLabel_4.setForeground(Color.PINK);
