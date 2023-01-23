@@ -62,8 +62,6 @@ public class WorkScheduleDisplay extends JPanel implements ActionListener {
 		//comboBox_1 = 年月を選択するコンボボックス
 		comboBox_1 = new JComboBox<String>();
 		
-		
-
 
 		//表示ボタン
 		JButton btnNewButton = new JButton("表示");
@@ -73,6 +71,7 @@ public class WorkScheduleDisplay extends JPanel implements ActionListener {
 		tablemodel = new DefaultTableModel(null,columns);
 		table = new JTable(tablemodel);
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); //複数行選択できないようにする
+		table.setDefaultEditor(Object.class, null); //セルの中身を変更できないようにする
 		
 		JTableHeader jheader = table.getTableHeader();
 		jheader.setReorderingAllowed(false);
