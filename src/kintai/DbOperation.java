@@ -62,7 +62,7 @@ public class DbOperation {
 
 
 
-	////CSVを読み込む際、ファイル名を選別するメソッド
+	////CSVを読み込む際、ファイル名を選別するメソッド	
 	//拡張子がCSVか判別するメソッド
 	public boolean IsCSVTrue(String extension) {
 		if( extension.equals("csv")) {     //拡張子でファイルを判別
@@ -83,39 +83,36 @@ public class DbOperation {
 		} else {
 			count++;
 		}
-		System.out.println(count);
 		if(count>0) {
 			return false;
 		} else {
 			return true;
 		}
 	}
-	
-	
+
+
 	//ファイル名の月を判別するメソッド
-		public boolean IsFileNameMonthTrue(String fileNameMonth) {
-			int count = 0;
-			for(int i=0;i<Month.length;i++) {
-				if(fileNameMonth.equals(Month[i])) {
-					count++;
-				}
-			}
-			if(count!=0) {
-				return true;
-			} else {
-				return false;
+	public boolean IsFileNameMonthTrue(String fileNameMonth) {
+		int count = 0;
+		for(int i=0;i<Month.length;i++) {
+			if(fileNameMonth.equals(Month[i])) {
+				count++;
 			}
 		}
-	
-	
+		if(count!=0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 
 
-	//ファイル名の名前からidをDBから検索し、それとファイル内のidと比べるメソッド
-	public int getNameIntoId(String fileNameEmployeeName) {
+
+	//ファイル名の名前がDB(employee_data)に登録されているか判別するメソッド
+	public String IsNameIntoId(String fileNameEmployeeName) {
 		Connection con=null;
 		Statement stmt=null;
 		ResultSet result= null;
-		ArrayList<Integer> list = new ArrayList<>();
 		String nameIntoId = "";
 		String sql = "select employe_number from employee_data where name = '" + fileNameEmployeeName +"'";
 		try {
@@ -136,7 +133,36 @@ public class DbOperation {
 				e.printStackTrace();
 			}
 		}
-		System.out.println("id:"+nameIntoId);
+		return nameIntoId;
+	}
+
+
+
+	//ファイル名の名前からidをDBから検索し、それとファイル内のidと比べるメソッド
+	public int getNameIntoId(String fileNameEmployeeName) {
+		Connection con=null;
+		Statement stmt=null;
+		ResultSet result= null;
+		String nameIntoId = "";
+		String sql = "select employe_number from employee_data where name = '" + fileNameEmployeeName +"'";
+		try {
+			con = DriverManager.getConnection ( url, user, password );
+			stmt = con.createStatement();
+			result = stmt.executeQuery ( sql );
+			while ( result.next() ) {
+				nameIntoId = result.getString(1);
+			}
+		} catch ( SQLException e ){
+			e.printStackTrace() ;
+		}finally{
+			try {
+				if(con != null) con.close();
+				if(stmt != null) stmt.close();
+				if(result != null) result.close();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
 		return Integer.parseInt(nameIntoId);
 	}
 
@@ -275,7 +301,6 @@ public class DbOperation {
 			result = pstmt.executeQuery();
 			while(result.next()) {//実行結果の取得
 				col1=result.getInt(1);
-				System.out.println(col1);
 				day = col1+"日";
 			}			
 		} catch ( SQLException e ) {
@@ -367,6 +392,10 @@ public class DbOperation {
 		}
 		return salary;
 	}
+
+
+
+
 
 
 
