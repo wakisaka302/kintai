@@ -18,78 +18,354 @@ public class DbOperation {
 	String url = "jdbc:postgresql://localhost:5432/postgres" ;	//DBのURL
 	String user = "postgres" ;		//DBのユーザー名
 	String password = "postgrestest" ;	//DBのパスワード
+	String Month[] = {"01","02","03","04","05","06","07","08","09","10","11","12"};
 
 
-	//出退勤両方を受け取るコンストラクタ
+	//出退勤をDBに挿入するメソッド(引数４つ)
 	public void attendance_dataInsert(String id, String day,String startTime, String finishTime) throws Exception {
 		String sql = "Insert into attendance_data values (?,?,?,?)" ;
 		try (Connection con=DriverManager.getConnection(url, user, password ) ;
 				PreparedStatement pstmt = con.prepareStatement(sql); ) {
-
-			//dayをDate型に変換  startTime,finishTimeをTime型に変換
-
 			Date sqlDate = Date.valueOf(day);
 			String sst1 = startTime + ":00";
 			String fft1 = finishTime + ":00";
 			Time sst = Time.valueOf(sst1);
 			Time fft = Time.valueOf(fft1);
-
 			pstmt.setInt(1,Integer.parseInt(id));
 			pstmt.setDate(2, sqlDate);
 			pstmt.setTime(3,sst);
 			pstmt.setTime(4,fft);
-
-
-
 			pstmt.execute();
-
-
-			//SimpleDateFormat f = new SimpleDateFormat("yyyy/MM/dd");
-			//Date d = f.parse(day);
-
-			//SimpleDateFormat g = new SimpleDateFormat("HH:mm");
-			//Date st = g.parse(startTime);
-			//Date ft = g.parse(finishTime);
-
-			//			pstmt.setInt(1,Integer.parseInt(id));
-			//			pstmt.setDate(2,(java.sql.Date)d);
-
-
-			//			if( !(startTime.equals("") || finishTime.equals(""))) {
-			//				pstmt.setDate(3,(java.sql.Date) st);
-			//				pstmt.setDate(4,(java.sql.Date) ft);
-			//			} else {
-			//				pstmt.setDate(3, null);
-			//				pstmt.setDate(4, null);
-			//			}
-			//			
-			//			pstmt.execute();
-
 		} catch ( SQLException e ) {
 			e.printStackTrace() ;
 		}
 	}
 
 
+
+	//出退勤をDBに挿入するメソッド(引数２つ)
 	public void attendance_dataInsert(String id, String day) throws Exception {
 		String sql = "Insert into attendance_data values (?,?,?,?)" ;
 		try (Connection con=DriverManager.getConnection(url, user, password ) ;
 				PreparedStatement pstmt = con.prepareStatement(sql); ) {
-
 			Date sqlDate = Date.valueOf(day);
-			//			SimpleDateFormat f = new SimpleDateFormat("yyyy/MM/dd");
-			//			Date d = f.parse(day);
-
 			pstmt.setInt(1,Integer.parseInt(id));
 			pstmt.setDate(2,sqlDate);
 			pstmt.setTime(3,null);
 			pstmt.setTime(4,null);
-
 			pstmt.execute();
-
 		} catch ( SQLException e ) {
 			e.printStackTrace() ;
 		}
+	}
+
+
+
+
+	////CSVを読み込む際、ファイル名を選別するメソッド
+	//拡張子がCSVか判別するメソッド
+	public boolean IsCSVTrue(String extension) {
+		if( extension.equals("csv")) {     //拡張子でファイルを判別
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+
+	//ファイル名を判別するメソッド
+	public boolean IsFileNameTrue(int fcl, String fileNameYearMonth) {
+		int count = 0;
+		if(fcl<=10) {
+			count++;
+		}
+		if(fileNameYearMonth.matches("[+-]?\\d*(\\.\\d+)?")) {
+		} else {
+			count++;
+		}
+		System.out.println(count);
+		if(count>0) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+	
+	
+	//ファイル名の月を判別するメソッド
+		public boolean IsFileNameMonthTrue(String fileNameMonth) {
+			int count = 0;
+			for(int i=0;i<Month.length;i++) {
+				if(fileNameMonth.equals(Month[i])) {
+					count++;
+				}
+			}
+			if(count!=0) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+	
+	
+
+
+	//ファイル名の名前からidをDBから検索し、それとファイル内のidと比べるメソッド
+	public int getNameIntoId(String fileNameEmployeeName) {
+		Connection con=null;
+		Statement stmt=null;
+		ResultSet result= null;
+		ArrayList<Integer> list = new ArrayList<>();
+		String nameIntoId = "";
+		String sql = "select employe_number from employee_data where name = '" + fileNameEmployeeName +"'";
+		try {
+			con = DriverManager.getConnection ( url, user, password );
+			stmt = con.createStatement();
+			result = stmt.executeQuery ( sql );
+			while ( result.next() ) {
+				nameIntoId = result.getString(1);
+			}
+		} catch ( SQLException e ){
+			e.printStackTrace() ;
+		}finally{
+			try {
+				if(con != null) con.close();
+				if(stmt != null) stmt.close();
+				if(result != null) result.close();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		System.out.println("id:"+nameIntoId);
+		return Integer.parseInt(nameIntoId);
+	}
+
+
+	//CSVファイルの年月とattendance_dataの年月を比べるメソッド
+	public boolean IsFileTrue(String id, Date date) {
+		Connection con=null;
+		Statement stmt=null;
+		ResultSet result= null;
+		ArrayList<Integer> list = new ArrayList<>();
+		int number = 0;
+		String sql = "select count(*) from attendance_data where employee_id = "+ (Integer.parseInt(id)) + " and date_trunc('month', date) = Date '"+date+"'";
+		try {
+			con = DriverManager.getConnection ( url, user, password );
+			stmt = con.createStatement();
+			result = stmt.executeQuery ( sql );
+			while ( result.next() ) {
+				number = result.getInt(1);
+			}
+		} catch ( SQLException e ){
+			e.printStackTrace() ;
+		}finally{
+			try {
+				if(con != null) con.close();
+				if(stmt != null) stmt.close();
+				if(result != null) result.close();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		if(number>0) {
+			return false;
+		} else {
+			return true;
+		}	
+	}
+
+
+	//ファイル内IDとemployee_data.employe_numberを比較するメソッド
+	public boolean IsId(String id) {
+		Connection con=null;
+		Statement stmt=null;
+		ResultSet result= null;
+		ArrayList<Integer> list = new ArrayList<>();
+		String sql = "select employe_number from employee_data";
+		try {
+			con=DriverManager.getConnection(url, user, password ) ;
+			PreparedStatement pstmt = con.prepareStatement(sql); 
+			result = pstmt.executeQuery();
+			while(result.next()) {
+				list.add(result.getInt(1));
+			}
+		} catch ( SQLException e ) {
+			e.printStackTrace() ;
+		}finally {
+			try {
+				if(result!= null) result.close();
+				if(stmt !=null) stmt.close();
+				if(con != null) con.close();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+
+		int count = 0;
+		for(int i:list) {
+			if(String.valueOf(i).equals(id)) {
+				count++;
+				return true;
+			} 
+		}
+
+		if(count==0) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+
+
+	//ファイル名をDB保存するメソッド
+	public void file_nameInsert(String fileName) throws Exception {
+		String sql = "Insert into file_name values (?)" ;
+		try (Connection con=DriverManager.getConnection(url, user, password ) ;
+				PreparedStatement pstmt = con.prepareStatement(sql); ) {
+			pstmt.setString(1,fileName);
+			pstmt.execute();
+		} catch ( SQLException e ) {
+			e.printStackTrace() ;
+		}
+	}
+
+
+	//ファイル名を検索するメソッド
+	public ArrayList<String> fileNameGet() {
+		Connection con=null;
+		Statement stmt=null;
+		ResultSet result= null;
+		ArrayList<String> list = new ArrayList<>();
+		String sql = "select * from file_name" ;
+		try {
+			con=DriverManager.getConnection(url, user, password ) ;
+			PreparedStatement pstmt = con.prepareStatement(sql); 
+			result = pstmt.executeQuery();
+			while(result.next()) {
+				String col1=result.getString(1);
+				list.add(col1);
+			}
+		} catch ( SQLException e ) {
+			e.printStackTrace() ;
+		}finally {
+			try {
+				if(result!= null) result.close();
+				if(stmt !=null) stmt.close();
+				if(con != null) con.close();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return list;
+	}
+
+	////ここまで
+
+
+
+	////ファイルチューザーに関するメソッド
+	public String employeeGetName() {
+		ResultSet result= null;
+		int col1 = 0;
+		String day = col1+"日";		
+		String sql = "select employe_name from "
+				+ "select count(*) from employee_data join attendance_data on employee_data.employe_number = attendance_data.employee_id where attendance_at_work is not null and leaving_work is not null" ;
+		try (Connection con=DriverManager.getConnection(url, user, password ) ;
+				PreparedStatement pstmt = con.prepareStatement(sql); ) {
+			result = pstmt.executeQuery();
+			while(result.next()) {//実行結果の取得
+				col1=result.getInt(1);
+				System.out.println(col1);
+				day = col1+"日";
+			}			
+		} catch ( SQLException e ) {
+			e.printStackTrace() ;
+		}
+		return day;
+	}
+
+
+
+	////明細に関するメソッド
+	//選択された社員の勤務日数を表示
+	public int GetWorkingDays(int id,Date m) {
+		int days = 0;
+		Connection con = null;
+		Statement stmt = null;
+		ResultSet result = null;
+		ArrayList<AData> display = new ArrayList<AData>();
+		String sql = "SELECT count(*) From attendance_data\n"
+				+ "WHERE date_trunc('month', date) = Date '" + m + "'\n"
+				+ "and employee_id =" + id +"\n"
+				+ "and attendance_data.attendance_at_work is not null and attendance_data.leaving_work is not null";
+		try {
+			con = DriverManager.getConnection ( url, user, password );
+			stmt = con.createStatement();
+			result = stmt.executeQuery ( sql );
+			while ( result.next() ) {
+				days = result.getInt (1) ; 
+			}
+		} catch ( SQLException e ){
+			e.printStackTrace() ;
+		}finally{
+			try {////クローズ処理クローズ処理
+				if(con != null) con.close();
+				if(stmt != null) stmt.close();
+				if(result != null) result.close();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return days;
+	}
+
+
+	//選択された社員の勤務時間を表示
+	public String GetWorkingHours(int id,Date m) throws Exception {
+		ResultSet result= null;
+		String hour = "00";
+		String minute = "00";
+		String HM= hour+"時間"+minute+"分";
+		String sql = "select sum(leaving_work-attendance_at_work) from attendance_data\n"
+				+ "WHERE date_trunc('month', date) = Date '" + m + "'\n"
+				+ "and employee_id =" + id +"\n"
+				+ "and attendance_data.attendance_at_work is not null and attendance_data.leaving_work is not null";
+		try (Connection con=DriverManager.getConnection(url, user, password ) ;
+				PreparedStatement pstmt = con.prepareStatement(sql); ) {			
+			result = pstmt.executeQuery();
+			while(result.next()) {//実行結果の取得
+				String col1= result.getString(1);
+				int firstIndex = col1.indexOf(":");
+				int lastIndex = col1.lastIndexOf(":");
+				hour = col1.substring(0, firstIndex);
+				minute = col1.substring(firstIndex+1,lastIndex);
+				HM = hour+"時間"+minute+"分";
+			}
+		} catch ( SQLException e ) {
+			e.printStackTrace() ;
+		}
+		return HM;
+	}
+
+
+
+	//選択された社員の基本給を表示
+	public String GetSalary(int id) throws Exception {
+		ResultSet result= null;
+		String salary = "0";
+		String sql = "select basic_salary from employee_data "
+				+ "WHERE employe_number =" + id +"\n";
+		try (Connection con=DriverManager.getConnection(url, user, password ) ;
+				PreparedStatement pstmt = con.prepareStatement(sql); ) {			
+			result = pstmt.executeQuery();
+			while(result.next()) {//実行結果の取得
+				int col1=result.getInt(1);
+				salary = String.valueOf(col1);
+			}
+		} catch ( SQLException e ) {
+			e.printStackTrace() ;
+		}
+		return salary;
 	}
 
 
@@ -102,126 +378,6 @@ public class DbOperation {
 
 
 
-
-
-	//
-	//	public void dbCompanyInsert(int id, int m_code, String name) {
-	//		// SQL 文の作成
-	//		//プレースホルダを使用して値を後設定
-	//		//プレースホルダとは「？」の部分のことを指す。
-	//		String sql = "Insert into comp (c_id,m_code,c_name) values (?,?,?)" ;
-	//		// PostgreSQL に接続(資源付き try 文の場合)
-	//		try (Connection con=DriverManager.getConnection(url, user, password ) ;
-	//				PreparedStatement pstmt = con.prepareStatement(sql); ) {
-	//			//SQL 文の出金額の？の場所に 3000 をセットする。
-	//			pstmt.setInt(1,id);
-	//			pstmt.setInt(2,m_code);
-	//			pstmt.setString(3,name);
-	//
-	//
-	//			pstmt.execute();
-	//			//SQL 文を実行し、結果を ResultSet に格納する。
-	//			//			ResultSet result = pstmt.executeQuery();
-	//			//			while(result.next()) {//実行結果の取得
-	//			//				Date col1 = result.getTimestamp(1) ; //日付
-	//			//				String col2 = result.getString ( 2 ) ; //費目
-	//			//				String col3 = result.getString ( 3 ) ; //メモ
-	//			//				int col4 = result.getInt ( 4 ) ; //入金額
-	//			//				int col5 = result.getInt ( 5 ) ; //出金額
-	//			//				System.out.println(df.format(col1) + ":" + col2 + ":" + col3 + ":"
-	//			//						+ col4 + ":" + col5); //表示
-	//			//			}
-	//		} catch ( SQLException e ) {
-	//			e.printStackTrace() ;
-	//		}
-	//	}
-	//
-	//
-	//	public void dbGoodsDelete(String name) {
-	//		// SQL 文の作成
-	//		//プレースホルダを使用して値を後設定
-	//		//プレースホルダとは「？」の部分のことを指す。
-	//		String sql = "Delete from goods where p_name = ?" ;
-	//		// PostgreSQL に接続(資源付き try 文の場合)
-	//		try (Connection con=DriverManager.getConnection(url, user, password ) ;
-	//				PreparedStatement pstmt = con.prepareStatement(sql); ) {
-	//			//SQL 文の出金額の？の場所に 3000 をセットする。
-	//			pstmt.setString(1,name);
-	//
-	//			int i = pstmt.executeUpdate();
-	//			if(i==0) {
-	//				System.out.println("除する対象のデータが存在しませんでした");
-	//			}
-	//
-	//
-	//			//SQL 文を実行し、結果を ResultSet に格納する。
-	//			//			ResultSet result = pstmt.executeQuery();
-	//			//			while(result.next()) {//実行結果の取得
-	//			//				Date col1 = result.getTimestamp(1) ; //日付
-	//			//				String col2 = result.getString ( 2 ) ; //費目
-	//			//				String col3 = result.getString ( 3 ) ; //メモ
-	//			//				int col4 = result.getInt ( 4 ) ; //入金額
-	//			//				int col5 = result.getInt ( 5 ) ; //出金額
-	//			//				System.out.println(df.format(col1) + ":" + col2 + ":" + col3 + ":"
-	//			//						+ col4 + ":" + col5); //表示
-	//			//			}
-	//		} catch ( SQLException e ) {
-	//			e.printStackTrace() ;
-	//		}
-	//	}
-	//	
-	//	
-	//	
-
-
-	//	public ArrayList<InfoData> dbGetGoodsInfo(){
-	//		Connection con = null;
-	//		Statement stmt = null;
-	//		ResultSet result = null;
-	//		String sql = "select goods.p_name, goods.price, comp.c_name from goods join comp on goods.m_code=comp.m_code" ;
-	//		ArrayList<InfoData> list = new ArrayList<InfoData>();
-	//		//String sql = "select * from 家計簿 where 出金額 >=" + 1000 ;
-	//		try {
-	//			// PostgreSQL に接続
-	//			con = DriverManager.getConnection ( url, user, password );
-	//			// SQL を実行するためのインスタンスを生成
-	//			stmt = con.createStatement();
-	//			// SQL の実行結果を格納する
-	//			result = stmt.executeQuery ( sql );
-	//			//家計簿は「日付、費目、メモ、入金額、出金額」の順に列が出来ている。
-	//			while ( result.next() ) {
-	//
-	//				String gname = result.getString (1) ; //費目
-	//				int gprice = result.getInt (2) ; //入金額
-	//				String cname = result.getString (3) ; //メモ
-	//
-	//				InfoData infodata = new InfoData(gname,gprice,cname);
-	//
-	//				list.add(infodata);
-	//
-	//
-	//
-	//
-	//				//System.out.println(df.format(col1) + ":" + col2 + ":" + col3 + ":"
-	//				//		+ col4 + ":" + col5);//表示
-	//			}
-	//		} catch ( SQLException e ) {
-	//			e.printStackTrace() ;
-	//		}finally{
-	//			//クローズ処理
-	//			try {
-	//				if(result != null) result.close();
-	//				if(stmt != null) stmt.close();
-	//				if(con != null) con.close();
-	//			}catch(Exception e) {
-	//				e.printStackTrace();
-	//			}
-	//		}
-	//
-	//
-	//
-	//		return list;
-	//	}
 
 
 
@@ -355,6 +511,37 @@ public class DbOperation {
 			}
 		}
 	}
+	public void dbAttendanceDelete(Object object) {
+		Connection conn = null;
+		//データベースにアクセスできように接続すること
+		PreparedStatement ps = null;
+		//① SQL文を受け取って解析し、値があればいつでも実行できる状態にします。
+		//　　② SQL文に必要な値をセットします。
+		// 　　③ SQL文を実行します。
+		String sql = "DELETE FROM attendance_data WHERE employee_id = ?";
+		try {
+			conn = DriverManager.getConnection(url, user, password);
+
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, (int) object);
+			int i = ps.executeUpdate();//前処理済みのINSERT文，UPDATE文，およびDELETE文を実行した場合、戻り値で更新行数が返却されます。
+			if(i >=1) {
+				System.out.println(object+"を削除しました");
+			}else {
+				System.out.println("削除する対象が存在しません");
+			}
+		}catch (Exception ex) {
+			ex.printStackTrace(); 
+		}finally {
+			try {
+				if(ps != null) ps.close();
+
+				if(conn != null) conn.close();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
 
 	public  int IdMaxGet() {
 		Connection con=null;
@@ -372,6 +559,7 @@ public class DbOperation {
 			result = pstmt.executeQuery();
 			while(result.next()) {//実行結果の取得
 				maxid = result.getInt(1);
+
 
 			}
 		} catch ( SQLException e ) {
@@ -420,7 +608,7 @@ public class DbOperation {
 
 				AData d = new AData(col1,col2,col3,col4);
 				list.add(d);
-				
+				//list.add(new InfoData(col1,col2,col3));
 			}
 		} catch ( SQLException e ){
 			e.printStackTrace() ;
@@ -439,55 +627,54 @@ public class DbOperation {
 		return list;
 	}
 
-	
-	//年月を取得するメソッド
-		public ArrayList<String> dbGetYearMonth(int id) {
-			
-			Connection con = null;
-			Statement stmt = null;
-			ResultSet result = null;
+	//年月を取得
+	public ArrayList<String> dbGetYearMonth(int id) {
 
-			ArrayList<String> list = new ArrayList<String>();
+		Connection con = null;
+		Statement stmt = null;
+		ResultSet result = null;
+
+		ArrayList<String> list = new ArrayList<String>();
 
 
-			String sql = "SELECT DISTINCT date_trunc('month', date) as yearmonth from attendance_data where employee_id = "+ id + "order by yearmonth desc";
+		String sql = "SELECT DISTINCT date_trunc('month', date) as yearmonth from attendance_data where employee_id = "+ id + "order by yearmonth desc";
 
-			try {
-				/// PostgreSQL に接続
-				con = DriverManager.getConnection ( url, user, password );
+		try {
+			/// PostgreSQL に接続
+			con = DriverManager.getConnection ( url, user, password );
 
-				// SQL を実行するためのインスタンスを生成
-				stmt = con.createStatement();
+			// SQL を実行するためのインスタンスを生成
+			stmt = con.createStatement();
 
-				// SQL の実行結果を格納する
-				result = stmt.executeQuery ( sql );
+			// SQL の実行結果を格納する
+			result = stmt.executeQuery ( sql );
 
-				//InfoDataのインスタンスを生成し、ArrayListに格納
-				while ( result.next() ) {
-					Date col1 = result.getDate (1) ; 
-					String str = new SimpleDateFormat("yyyy-MM").format(col1);
+			//InfoDataのインスタンスを生成し、ArrayListに格納
+			while ( result.next() ) {
+				Date col1 = result.getDate (1) ; 
+				String str = new SimpleDateFormat("yyyy-MM").format(col1);
 
-					list.add(str);
-					
-				}
-			} catch ( SQLException e ){
-				
-				e.printStackTrace() ;
-
-			}finally{
-				try {
-					////クローズ処理クローズ処理
-					if(con != null) con.close();
-					if(stmt != null) stmt.close();
-					if(result != null) result.close();
-				}catch(Exception e) {
-					e.printStackTrace();
-
-				}
+				list.add(str);
+				//list.add(new InfoData(col1,col2,col3));
 			}
-			return list;
-			
+		} catch ( SQLException e ){
+
+			e.printStackTrace() ;
+
+		}finally{
+			try {
+				////クローズ処理クローズ処理
+				if(con != null) con.close();
+				if(stmt != null) stmt.close();
+				if(result != null) result.close();
+			}catch(Exception e) {
+				e.printStackTrace();
+
+			}
 		}
+		return list;
+
+	}
 
 	//選択された社員名・年月より勤務表を表示
 	public ArrayList<AData> dbGetWorkSchedule(int id,Date m) {
@@ -497,6 +684,8 @@ public class DbOperation {
 		ResultSet result = null;
 
 		ArrayList<AData> display = new ArrayList<AData>();
+
+		//Date sqlDate= Date.valueOf((String) month);
 
 		String sql = "SELECT date,attendance_at_work,leaving_work From attendance_data\n"
 				+ "WHERE date_trunc('month', date) = Date '" + m + "'\n"
@@ -520,7 +709,7 @@ public class DbOperation {
 
 				AData d = new AData(col1,col2,col3);
 				display.add(d);
-				
+				//list.add(new InfoData(col1,col2,col3));
 			}
 		} catch ( SQLException e ){
 			e.printStackTrace() ;
@@ -540,6 +729,6 @@ public class DbOperation {
 		return display;
 	}
 	{
-}
+	}
 
 }

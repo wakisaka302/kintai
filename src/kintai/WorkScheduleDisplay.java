@@ -1,5 +1,6 @@
 package kintai;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,6 +11,7 @@ import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -33,6 +35,9 @@ public class WorkScheduleDisplay extends JPanel implements ActionListener {
 	 * Create the panel.
 	 */
 	public WorkScheduleDisplay() {
+		setBackground(new Color(0, 64, 128));
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setForeground(new Color(255, 0, 0));
 
 		//コンボボックス
 		//comboBox = 社員名を選択するコンボボックス
@@ -45,15 +50,18 @@ public class WorkScheduleDisplay extends JPanel implements ActionListener {
 			//取得した社員名をコンボボックスへセットする
 			for(int i = 0; i < list.size(); i++) { 
 				comboBox.addItem(list.get(i).getName());
-				
+				//System.out.println(list.get(i).getEmploye_number());
 			}
+
 			comboBox.addActionListener(this);
 
 		}
 
-		//comboBox_1 = 年月を選択するコンボボックス（comboBoxを選択することで中身が選択できるようになる）
+		//comboBox_1 = 年月を選択するコンボボックス
 		comboBox_1 = new JComboBox<String>();
 		
+		
+
 
 		//表示ボタン
 		JButton btnNewButton = new JButton("表示");
@@ -64,7 +72,6 @@ public class WorkScheduleDisplay extends JPanel implements ActionListener {
 		table = new JTable(tablemodel);
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); //複数行選択できないようにする
 		
-		//列が動かないように固定する
 		JTableHeader jheader = table.getTableHeader();
 		jheader.setReorderingAllowed(false);
 
@@ -79,28 +86,47 @@ public class WorkScheduleDisplay extends JPanel implements ActionListener {
 			public void actionPerformed(ActionEvent e) {
 
 				//データベースから取得したリストを受け取る
-				Date m= Date.valueOf((String)comboBox_1.getSelectedItem()+"-01");
+
+				if(comboBox.getSelectedIndex()!=-1 && comboBox_1.getSelectedIndex()!=-1) {
+				Date m= Date.valueOf((String)comboBox_1.getSelectedItem()+"-01");//mをstring型に変更して年と月しかないので日を付け加えている
 				display = db.dbGetWorkSchedule(list.get(comboBox.getSelectedIndex()).getEmploye_number(),m);
 
+				//display = db.dbGetWorkSchedule(list.get(comboBox.getSelectedIndex()).getEmploye_number());
+				//list.get(comboBox_1.getSelectedIndex()).getDate();
 				ConvertToObject(display);
+				lblNewLabel.setText("表示しました");
+				//db.dbGetWorkSchedule(comboBox.getSelectedIndex());
+				}else {
+					lblNewLabel.setText("選択されてない部分があります");
+				}
+				
+
 
 
 			}
 		});
+		
+		
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addGap(34)
+					.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, 109, GroupLayout.PREFERRED_SIZE)
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 393, GroupLayout.PREFERRED_SIZE)
 						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(comboBox_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(btnNewButton)))
-					.addContainerGap(23, Short.MAX_VALUE))
+							.addGap(116)
+							.addComponent(lblNewLabel))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(18)
+							.addComponent(comboBox_1, GroupLayout.PREFERRED_SIZE, 116, GroupLayout.PREFERRED_SIZE)
+							.addGap(18)
+							.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 117, GroupLayout.PREFERRED_SIZE)))
+					.addGap(38))
+				.addGroup(groupLayout.createSequentialGroup()
+					.addGap(23)
+					.addComponent(scrollPane, 0, 0, Short.MAX_VALUE)
+					.addGap(23))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
@@ -108,10 +134,11 @@ public class WorkScheduleDisplay extends JPanel implements ActionListener {
 					.addGap(5)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(comboBox_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnNewButton))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
+						.addComponent(lblNewLabel)
+						.addComponent(btnNewButton)
+						.addComponent(comboBox_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 223, GroupLayout.PREFERRED_SIZE)
 					.addContainerGap())
 		);
 		setLayout(groupLayout);
@@ -133,24 +160,36 @@ public class WorkScheduleDisplay extends JPanel implements ActionListener {
 		}
 	}
 
+	
+//	@Override
+//	public void itemStateChanged(ItemEvent e) {
+//System.out.println(comboBox.getSelectedIndex());
+//		if(comboBox.getSelectedIndex() >= 0) {
+//
+//			//int id = db.dbGetEmployeeId((String)comboBox.getSelectedItem());
+//			ym = db.dbGetYearMonth(list.get(comboBox.getSelectedIndex()).getEmployee_id());
+//
+//			for(int i = 0; i < ym.size(); i++) { 
+//				comboBox_1.addItem(ym.get(i));
+//
+//			}
+//		}
+//	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		
-		//年月選択コンボボックスの中身を削除する
 		comboBox_1.removeAllItems();;
-		
-		//年月選択コンボボックスに中身を入れる
 		if(comboBox.getSelectedIndex() >= 0) {
 
+			//int id = db.dbGetEmployeeId((String)comboBox.getSelectedItem());
 			ym = db.dbGetYearMonth(list.get(comboBox.getSelectedIndex()).getEmploye_number());
-
+//System.out.println(list.get(comboBox.getSelectedIndex()).getEmployee_id());
 			for(int i = 0; i < ym.size(); i++) { 
 				comboBox_1.addItem(ym.get(i));
 
 			}
 		}
 	}
-
 }
 
