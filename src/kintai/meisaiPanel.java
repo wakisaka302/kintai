@@ -141,17 +141,17 @@ public class meisaiPanel extends JPanel implements ActionListener{
 
 
 						//総支給額
-						textField_22.setText("総支給額：   " + basicSalary);
+						textField_22.setText("総支給額：   ¥" + basicSalary);
 
 
 						//総控除額
 						deduction =  healthInsurance+pensionInsurance+employmentInsurance;
-						textField_23.setText("総控除額：   " + deduction);
+						textField_23.setText("総控除額：   ¥" + deduction);
 
 
 						//差引支給額
 						total = basicSalary - deduction;
-						textField_24.setText("差引支給額：   " + total);
+						textField_24.setText("差引支給額：   ¥" + total);
 
 
 					} else {
