@@ -89,88 +89,92 @@ public class meisaiPanel extends JPanel implements ActionListener{
 		JButton btnNewButton = new JButton("表示");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//データベースから取得したリストを受け取る
-				Date m = Date.valueOf((String) comboBox_1_1.getSelectedItem()+"-01");
 
-				//勤務日数を表示
-				try {
-					textField_2.setText(String.valueOf(db.GetWorkingDays(list.get(comboBox.getSelectedIndex()).getEmploye_number(),m)));
-				} catch (Exception e1) {
-					e1.printStackTrace();
+				if(comboBox.getSelectedIndex()!=-1 && comboBox_1_1.getSelectedIndex()!=-1) {
+
+					//データベースから取得したリストを受け取る
+					Date m = Date.valueOf((String) comboBox_1_1.getSelectedItem()+"-01");
+
+					//勤務日数を表示
+					try {
+						textField_2.setText(String.valueOf(db.GetWorkingDays(list.get(comboBox.getSelectedIndex()).getEmploye_number(),m)));
+					} catch (Exception e1) {
+						e1.printStackTrace();
+					}
+
+					//勤務時間を表示
+					try {
+						textField_6.setText(db.GetWorkingHours(list.get(comboBox.getSelectedIndex()).getEmploye_number(),m));
+					} catch (Exception e1) {
+						e1.printStackTrace();
+					}
+
+					//基本給を表示
+					try {
+						textField_11.setText(db.GetSalary(list.get(comboBox.getSelectedIndex()).getEmploye_number()));
+						basicSalary = Integer.parseInt(db.GetSalary(list.get(comboBox.getSelectedIndex()).getEmploye_number()));
+					} catch (Exception e1) {
+						e1.printStackTrace();
+					}
+
+
+					if(IsSalary(basicSalary)) {
+						//健康保険料を表示
+						healthInsurance = InsuranceCal(basicSalary);
+						textField_17.setText(String.valueOf(healthInsurance));
+
+
+						//厚生年金を表示
+						pensionInsurance = PensionCal(basicSalary);
+						textField_19.setText(String.valueOf(pensionInsurance));
+
+
+						//雇用保険料を表示
+						employmentInsurance = Math.round(basicSalary*5/1000);
+						textField_21.setText(String.valueOf(employmentInsurance));
+
+
+						//総支給額
+						textField_22.setText("総支給額   " + basicSalary);
+
+
+						//総控除額
+						deduction =  healthInsurance+pensionInsurance+employmentInsurance;
+						textField_23.setText("総控除額   " + deduction);
+
+
+						//差引支給額
+						total = basicSalary - deduction;
+						textField_24.setText("差引支給額   " + total);
+
+
+					} else {
+						//健康保険料を表示
+						textField_17.setText("基本給から計算できません");
+
+
+						//厚生年金を表示
+						textField_19.setText("基本給から計算できません");
+
+
+						//雇用保険料を表示
+						textField_21.setText("基本給から計算できません");
+
+
+						//総支給額
+						textField_22.setText("総支給額   " + basicSalary);
+
+
+						//総控除額
+						textField_23.setText("総控除額   " + "基本給から計算できません");
+
+
+						//差引支給額
+						textField_24.setText("差引支給額   " + "基本給から計算できません");
+
+					}
+
 				}
-
-				//勤務時間を表示
-				try {
-					textField_6.setText(db.GetWorkingHours(list.get(comboBox.getSelectedIndex()).getEmploye_number(),m));
-				} catch (Exception e1) {
-					e1.printStackTrace();
-				}
-
-				//基本給を表示
-				try {
-					textField_11.setText(db.GetSalary(list.get(comboBox.getSelectedIndex()).getEmploye_number()));
-					basicSalary = Integer.parseInt(db.GetSalary(list.get(comboBox.getSelectedIndex()).getEmploye_number()));
-				} catch (Exception e1) {
-					e1.printStackTrace();
-				}
-
-
-				if(IsSalary(basicSalary)) {
-					//健康保険料を表示
-					healthInsurance = InsuranceCal(basicSalary);
-					textField_17.setText(String.valueOf(healthInsurance));
-
-
-					//厚生年金を表示
-					pensionInsurance = PensionCal(basicSalary);
-					textField_19.setText(String.valueOf(pensionInsurance));
-
-
-					//雇用保険料を表示
-					employmentInsurance = Math.round(basicSalary*5/1000);
-					textField_21.setText(String.valueOf(employmentInsurance));
-
-
-					//総支給額
-					textField_22.setText("総支給額   " + basicSalary);
-
-
-					//総控除額
-					deduction =  healthInsurance+pensionInsurance+employmentInsurance;
-					textField_23.setText("総控除額   " + deduction);
-
-
-					//差引支給額
-					total = basicSalary - deduction;
-					textField_24.setText("差引支給額   " + total);
-					
-					
-				} else {
-					//健康保険料を表示
-					textField_17.setText("基本給から計算できません");
-
-
-					//厚生年金を表示
-					textField_19.setText("基本給から計算できません");
-
-
-					//雇用保険料を表示
-					textField_21.setText("基本給から計算できません");
-
-
-					//総支給額
-					textField_22.setText("総支給額   " + basicSalary);
-
-
-					//総控除額
-					textField_23.setText("総控除額   " + "基本給から計算できません");
-
-
-					//差引支給額
-					textField_24.setText("差引支給額   " + "基本給から計算できません");
-
-				}
-
 			}
 		});
 
