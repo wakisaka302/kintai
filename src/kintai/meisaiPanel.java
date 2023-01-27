@@ -157,6 +157,7 @@ public class meisaiPanel extends JPanel implements ActionListener{
 						total = basicSalary - deduction;
 						textField_24.setText("差引支給額：   ¥" + total);
 						
+
 						
 						lblNewLabel.setText("");
 
