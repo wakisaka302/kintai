@@ -77,6 +77,7 @@ public class EmployeeRegistrationUpPanel extends JPanel {
 		btnNewButton.setFont(new Font("MS UI Gothic", Font.BOLD, 12));
 		btnNewButton.addActionListener(new ActionListener() {
 
+			//削除ボタンを押したときのアクション
 			public void actionPerformed(ActionEvent e) {
 				int a=0;
 				a=table.getSelectedRow();
@@ -95,6 +96,7 @@ public class EmployeeRegistrationUpPanel extends JPanel {
 		});
 
 
+		//グループレイアウト
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
 				groupLayout.createParallelGroup(Alignment.LEADING)
