@@ -411,7 +411,7 @@ public class DbOperation {
 
 
 
-	//データベースから登録したデータを取ってくる
+	//employee_dataから登録しているデータを取ってくる
 	public ArrayList<EmployeeData> dbGet() {
 		Connection con=null;
 		Statement stmt=null;
@@ -480,7 +480,7 @@ public class DbOperation {
 	//			}
 	//		}
 	//	}
-	//登録ボタンを押した時の登録するメソッド
+	//登録ボタンを押した時社員情報をデータベースに登録する
 	public void dbInsert(int bangou,int kihon,String seibetu ,String name) {
 		Connection conn = null;
 		PreparedStatement ps = null;
@@ -511,7 +511,7 @@ public class DbOperation {
 			}
 		}
 	}
-	
+	//employee_dataから社員情報を削除
 	public void dbDelete(Object object) {
 		Connection conn = null;
 		//データベースにアクセスできように接続すること
@@ -611,6 +611,24 @@ public class DbOperation {
 		return maxid;
 	}
 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	//社員名を取得
 	public ArrayList<AData> dbGetEmployeeData() {
 

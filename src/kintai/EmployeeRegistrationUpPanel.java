@@ -28,14 +28,12 @@ public class EmployeeRegistrationUpPanel extends JPanel {
 	private JTable table;
 	static DefaultTableModel tablemodel;
 	String [] columns= {"社員ID","名前","性別","基本給"};
-	/**
-	 * Create the panel.
-	 */
+	
 
 
-	/**
-	 * Create the panel.
-	 */
+	
+	
+	//画面に社員情報を表示する
 	public EmployeeRegistrationUpPanel() {
 		setBackground(new Color(0, 64, 128));
 
@@ -83,8 +81,8 @@ public class EmployeeRegistrationUpPanel extends JPanel {
 				a=table.getSelectedRow();
 				if(a>=0) {
 					DB.dbAttendanceDelete(table.getValueAt(table.getSelectedRow(), 0));//IDでAttendance_dataから削除
-					DB.dbDelete(table.getValueAt(table.getSelectedRow(), 0));
-					tablemodel.removeRow(table.getSelectedRow());
+					DB.dbDelete(table.getValueAt(table.getSelectedRow(), 0));//employee_dataから削除
+					tablemodel.removeRow(table.getSelectedRow());//画面から削除
 
 					lblNewLabel_4_1_1.setText("削除成功：社員情報を削除しました。");//脇坂追加文
 					lblNewLabel_4_1_1.setForeground(Color.WHITE);//脇坂追加分
@@ -148,6 +146,7 @@ public class EmployeeRegistrationUpPanel extends JPanel {
 
 	}
 
+	//新しく登録した社員画面に表示する為のメソッド
 	public static void setObjectRowData(int max, int kihonkyu, String seibetu, String name) {
 
 		Object[] obb = new Object[4];
