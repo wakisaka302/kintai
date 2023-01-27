@@ -16,6 +16,7 @@ public class loginSuccessImage extends JPanel {
 		lblNewLabel.setIcon(new ImageIcon(loginSuccessImageLocation));
 		add(lblNewLabel);
 
+		
 	}
 
 }

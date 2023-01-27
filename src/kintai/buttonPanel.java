@@ -77,6 +77,8 @@ public class buttonPanel extends JPanel implements ActionListener{
 		btnNewButton_3.addActionListener(this);		
 		btnNewButton_3.setActionCommand("meisai");
 
+	
+		
 		JButton btnNewButton_4 = new JButton("");
 		String loginSuccessImageLocation = System.getProperty("java.class.path")+"\\image\\×ボタン1.jpg";
 		btnNewButton_4.setIcon(new ImageIcon(loginSuccessImageLocation));
