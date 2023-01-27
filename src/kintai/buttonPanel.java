@@ -77,8 +77,10 @@ public class buttonPanel extends JPanel implements ActionListener{
 		btnNewButton_3.addActionListener(this);		
 		btnNewButton_3.setActionCommand("meisai");
 
-		JButton btnNewButton_4 = new JButton("閉じる");
-		btnNewButton_4.setIcon(new ImageIcon("C:\\Users\\3030747\\git\\kintai\\bin\\image\\×ボタン.png"));
+		JButton btnNewButton_4 = new JButton("");
+		String loginSuccessImageLocation = System.getProperty("java.class.path")+"\\image\\×ボタン1.jpg";
+		btnNewButton_4.setIcon(new ImageIcon(loginSuccessImageLocation));
+//		btnNewButton_4.setIcon(new ImageIcon("C:\\Users\\3030743\\git\\kintai\\bin\\image\\×ボタン1.jpg"));
 		btnNewButton_4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//「閉じる」でwindowを閉じる
