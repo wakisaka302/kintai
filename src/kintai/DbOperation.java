@@ -411,6 +411,7 @@ public class DbOperation {
 
 
 
+	//データベースから登録したデータを取ってくる
 	public ArrayList<EmployeeData> dbGet() {
 		Connection con=null;
 		Statement stmt=null;
@@ -479,6 +480,7 @@ public class DbOperation {
 	//			}
 	//		}
 	//	}
+	//登録ボタンを押した時の登録するメソッド
 	public void dbInsert(int bangou,int kihon,String seibetu ,String name) {
 		Connection conn = null;
 		PreparedStatement ps = null;
@@ -509,6 +511,7 @@ public class DbOperation {
 			}
 		}
 	}
+	
 	public void dbDelete(Object object) {
 		Connection conn = null;
 		//データベースにアクセスできように接続すること
@@ -540,6 +543,7 @@ public class DbOperation {
 			}
 		}
 	}
+	//attendance_dataからデータを削除する
 	public void dbAttendanceDelete(Object object) {
 		Connection conn = null;
 		//データベースにアクセスできように接続すること
@@ -572,6 +576,7 @@ public class DbOperation {
 		}
 	}
 
+	//一番大きな値のidを取ってくる
 	public  int IdMaxGet() {
 		Connection con=null;
 		Statement stmt=null;

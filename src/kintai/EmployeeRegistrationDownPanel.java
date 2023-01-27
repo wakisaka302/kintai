@@ -58,6 +58,7 @@ public class EmployeeRegistrationDownPanel extends JPanel {
 		JButton btnNewButton = new JButton("登録");
 		btnNewButton.setFont(new Font("MS UI Gothic", Font.BOLD, 12));
 		btnNewButton.addActionListener(new ActionListener() {
+			//登録ボタンをおしたときのアクション
 			public void actionPerformed(ActionEvent e) {
 				int check=0;
 				int kihonkyu=0;
@@ -89,21 +90,28 @@ public class EmployeeRegistrationDownPanel extends JPanel {
 				
 				String name=textField_3.getText();//nameにtextField_3を代入
 				String name2=name.replaceAll("[ 　]", "");//nameの空白を削除
+				//文字数が50字以上の時の処理
 				if(name.length()>=50) {
 					raberu="名前の文字が多すぎます。";
 					lblNewLabel_4.setForeground(Color.PINK);
 					lblNewLabel_4.setText(raberu);
-				}else {
-                if(name2.length()==0) {//nameの文字列が0であればラベルに名前を入力してくださいを表示
+				}
+				//文字数が50字以内の時
+				else {
+                if(name2.length()==0) {//名前が未入力の時はラベルに名前を入力してくださいを表示
                 	raberu="登録時エラー：社員名を入力してください。";
     				lblNewLabel_4.setForeground(Color.PINK);
     				lblNewLabel_4.setText(raberu);
-    				
-				}else {
-					if(kihonkyu<0) {//基本給がマイナスなら
+    			}
+                //名前が入力されているときの処理
+                else {
+                	//基本給がマイナスの時の処理
+					if(kihonkyu<0) {
 						raberu="エラー：正しいパスワードを入力してください";
 	    				lblNewLabel.setText(raberu);
-					}else {
+					}
+					//基本給がマイナスじゃないときの処理
+					else {
 				DB.dbInsert(max, kihonkyu, seibetu, name);//dbInsert()のメソッドを使いデータベースに登録する
 				EmployeeRegistrationUpPanel.setObjectRowData(max, kihonkyu, seibetu, name);//登録した情報を画面に表示
 				raberu="登録成功：社員情報をDBに登録しました。";
